@@ -73,7 +73,7 @@ Search Bar: Search sightings by species or location.
 
 ## Steps
 
-- [ ] Schema + seed + db.sql 
+- [X] Schema + seed + db.sql 
 - [ ] Sighting CRUD API 
 - [ ] Discovery（JOIN list）
 - [ ] My Records（form + CRUD）
@@ -84,6 +84,6 @@ Search Bar: Search sightings by species or location.
 
 ## Backend
 ```bash
-npm install express cors dotenv
+npm install express cors dotenv pg
 npm install --save-dev nodemon
 ```
