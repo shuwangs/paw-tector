@@ -1,7 +1,8 @@
-
+import React from "react";
+import '../App.css';
 const MyRecords = () => {
     return (
-        <p>This is the user records page</p>
+        <div>This is the user records page</div>
     )
 }
 

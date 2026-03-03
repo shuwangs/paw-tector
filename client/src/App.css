@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: var(--bg-primary);
+  color: var(--text_color);
 }
 
 .logo {
@@ -16,4 +18,14 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.top-nav {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav-link-ctn {
+  gap: 10px;
 }
