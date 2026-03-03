@@ -74,3 +74,5 @@ VALUES
 
 -- Rocket sightings
 (6, 1, 'Residential street trash bins', '20004', 'DC', 38.8951, -77.0364, 'unknown', false, 'Very fast; only briefly observed.', NULL);
+
+COMMIT;
