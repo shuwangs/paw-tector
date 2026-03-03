@@ -87,3 +87,9 @@ Search Bar: Search sightings by species or location.
 npm install express cors dotenv pg
 npm install --save-dev nodemon
 ```
+
+
+## Client
+```bash
+npm install react-router-dom react-bootstrap bootstrap
+```

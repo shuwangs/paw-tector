@@ -6,9 +6,14 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-  --bg-primary: #ecfdf5;
-  --primary_action_color: #10b981;
-  --secondary_action_color: #047857;
+  --bg-primary: #f0fdf4;
+
+  /* --primary_action_color: #10b981; */
+  /* --secondary_action_color: #047857; */
+
+  --text_color: #1f2937;
+  --primary_action_color: #22c55e;
+  --secondary_action_color: #16a34a;
   font-family: 'Nunito';
   font-synthesis: none;
   text-rendering: optimizeLegibility;
