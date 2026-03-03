@@ -82,3 +82,8 @@ Search Bar: Search sightings by species or location.
 - [ ]hotspots / stats / detail page
 
 
+## Backend
+```bash
+npm install express cors dotenv
+npm install --save-dev nodemon
+```
