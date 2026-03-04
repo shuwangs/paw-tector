@@ -21,7 +21,8 @@ CREATE TABLE users (
 -- animal_types TABLE
 CREATE TABLE animal_types (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    name VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 -- individual TABLE
@@ -55,7 +56,8 @@ CREATE TABLE sightings (
     need_help BOOLEAN NOT NULL DEFAULT false,
     note TEXT,
     image_url TEXT,
-    sighted_at TIMESTAMP NOT NULL DEFAULT NOW()
+    sighted_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 COMMIT;
