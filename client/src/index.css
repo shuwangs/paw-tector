@@ -7,8 +7,8 @@
   color: rgba(255, 255, 255, 0.87);
   --bg-primary: #f0fdf4;
 
-  /* --primary_action_color: #10b981; */
-  /* --secondary_action_color: #047857; */
+  --secondary_action_color: #10b981;
+  --primary_accent_color: #047857;
 
   --text_color: #1f2937;
   --primary_action_color: #22c55e;

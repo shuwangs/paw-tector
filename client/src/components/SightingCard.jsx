@@ -1,10 +1,10 @@
 import React from "react";
-
+import './DisplayCard.css';
 const SightingCard = ({sighting}) => {
 
     return (
-        <div className="sighting">
-            <div className="species-icon">sighting</div>
+        <div className="sighting-card">
+            <div className="species-icon">🐶</div>
             <div className="sighting-details">
                 <div className="status-ctn">{sighting.health_status}</div>
                 <div className="species">Dog</div>

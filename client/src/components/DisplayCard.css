@@ -1,0 +1,35 @@
+.animal-card {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+
+/* Sightings Cards related */
+.sightingsList-ctn {
+    gap: 30px;
+
+}
+.sighting-card{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    padding:20px;
+    border-radius:20px;
+    background:white;
+    gap:20px;
+    max-width: 400px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+.species-icon {
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--primary_accent_color);
+    font-size: 30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color: var(--secondary_accent_color);
+}
