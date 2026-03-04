@@ -1,12 +1,16 @@
 import React,{useState, useEffect} from "react";
 import { getUsers } from "../api/userApi.js";
-import '../App.css';
 import { useRoutes } from "react-router-dom";
+import { useCurrentUser } from "../context/CurrentUserContext.jsx";
+
+import '../App.css';
 const MyRecords = () => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const { currentUserId, setCurrentUserId} = useCurrentUser();
+    
     useEffect(() =>{
         const loadUsers = async () => {
             setLoading(true);
@@ -33,12 +37,17 @@ const MyRecords = () => {
 
             <div className='total-user'>
                 <option>User List</option>
-                <select>
+                <select value={currentUserId || ""}
+                    onChange={(e) => setCurrentUserId(e.target.value)}>
                     {users.map((u) => (
-                        <option key={u.id}>{u.user_name}</option>
+                        <option key={u.id} value={u.id}>{u.user_name}</option>
                     ))}
                 </select>
             </div>
+
+            <div className="current-user-stats"></div>
+
+
         
         
         </div>
