@@ -31,5 +31,38 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background-color: var(--secondary_accent_color);
+    background-color: var(--bg-secondary);
+}
+
+.details-top {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.details-top .status-ctn {
+    background-color: var(--bg-secondary);
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+.status-ctn{
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+}
+
+.status-ctn.healthy{
+    background: var(--status-healthy-bg);
+    color: var(--status-healthy-text);
+}
+
+.status-ctn.unknown{
+    background: var(--status-unknown-bg);
+    color: var(--status-unknown-text);
+}
+
+.status-ctn.injured, .status-ctn.sick{
+    background: var(--status-injured-bg);
+    color: var(--status-injured-text);
 }

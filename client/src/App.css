@@ -20,12 +20,37 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Navbar */
 .top-nav {
   display:flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 14px 24px;
+  background: white;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--primary_accent_color);
+  text-decoration: none;
 }
 
 .nav-link-ctn {
-  gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+
+}
+
+.nav-link:hover {
+  background: rgba(10, 163, 112, 0.12);
 }

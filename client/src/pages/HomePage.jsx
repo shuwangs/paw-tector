@@ -1,44 +1,45 @@
 
 import React from "react";
-
+import './HomePage.css'
 const HomePage = () => {
     return (
         <div>
         
             <div className="hero">
                 <div>
-                    <h1>Track, Care, Connect</h1>
+                    <h1>💚 Track, Care, Connect</h1>
                     <p>Join our community of volunteers to track and care for stray animals in your neighborhood</p>
                 </div>
-
-                <button>Join Our Community</button>
-                <button> Report Sighting</button>
+                <div className="btn-group">
+                    <button className="btn-join">💚 Join Our Community</button>
+                    <button className="btn-report">🔍 Report Sighting</button>
+                </div>
             </div>
 
             <div className="stats-ctn">
-                <div> 
-                    <div>🐕</div>
-                    <div> 3</div>
-                    <div>Animal Tracked</div>
+                <div className="stats-card"> 
+                    <div className="stats-icon">🐕</div>
+                    <div className="stats-count"> 3</div>
+                    <div className="stats-class"> Animal Tracked</div>
                 </div>
 
-                <div>
-                    <div>👀</div>
-                    <div> 3</div>
-                    <div>Total Sightings</div>
+                <div className="stats-card">
+                    <div className="stats-icon"> 👀</div>
+                    <div className="stats-count"> 3</div>
+                    <div className="stats-class">Total Sightings</div>
                 </div>
 
-                <div>
-                    <div>📍</div>
-                    <div> 3</div>
-                    <div>Locations</div>
+                <div className="stats-card">
+                    <div className="stats-icon">📍</div>
+                    <div className="stats-count"> 3</div>
+                    <div className="stats-class">Locations</div>
                 </div>
             </div>
 
 
-            <div>
+            <div className="description-ctn">
                 <h2>How It Works 🎯</h2>
-                <div >
+                <div className="description-cards">
                     <div className="card discription-card">
                         <h2>📸</h2>
                         <h3>Spot & Report</h3>
