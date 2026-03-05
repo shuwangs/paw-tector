@@ -21,6 +21,22 @@ router.get('/:userId/tracked-animals', async (req, res) => {
         const tracked_animals = await userServie.getUserTrackedAnimal(userId);
         console.log("user: ", req.params.userId ," tracked animals are: ", tracked_animals);
         res.json(tracked_animals);
+
+    } catch(err) {
+        res.status(500).json({error: err.message});
+    }
+})
+
+router.delete('/:userId/tracked-animals/:individualId', async (req, res) => {
+    try{
+        const userId = Number(req.params.userId);
+        const animalId = Number(req.params.individualId);
+        const deletedCount = await userServie.deleteUserTrackedAnimal(userId, animalId);
+        console.log("user: ", req.params.userId ," deleted animal are: ", tracked_animals);
+        res.json({
+            message: "Tracked animal deleted",
+            deleted: deletedCount
+        });
         
     } catch(err) {
         res.status(500).json({error: err.message});

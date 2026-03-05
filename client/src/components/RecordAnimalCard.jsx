@@ -1,7 +1,13 @@
 import React from "react";
+import { useCurrentUser } from "../context/CurrentUserContext";
+
 import "./DisplayCard.css";
 
 const RecordAnimalCard = ({animal}) => {
+    const { deleteTrackedAnimal } = useCurrentUser();
+    const handleDelete = () => {
+        deleteTrackedAnimal(animal.individual_id);
+    };
     return (
         <div className="animal-card">
             <div className="animal-icon">Cat</div>
@@ -15,7 +21,7 @@ const RecordAnimalCard = ({animal}) => {
             <div className='btn-ctn'>
                 <button>👁️</button>
                 <button>✏️</button>
-                <button>🗑️</button>
+                <button onClick={handleDelete}>🗑️</button>
             </div>
 
         </div>

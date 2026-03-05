@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const CurrentUserContext = createContext();
 
 export const CurrentUserProvider = ({children}) => {
+
     const [currentUserId, setCurrentUserId] = useState(1);
     const [trackedAnimals, setTrackedAnimals] = useState([])
     const [error, setError] = useState(null);
@@ -34,13 +35,44 @@ export const CurrentUserProvider = ({children}) => {
         fetchTrackedAnimals(currentUserId);
     }, [currentUserId]);
 
+    const deleteTrackedAnimal = async (user_id, animal_id) => {
+        const userId = Number(user_id);
+        const individualId = Number(animal_id);
+
+
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
+                method: "DELETE"
+            })
+
+            if (!response.ok) {
+                throw new Error(`Delete tracked animal failed (${response.status})`);
+            }
+            setTrackedAnimals(prev => {
+                return prev.filter((animal) => animal.invidual_id != individualId);
+            })
+
+        } catch(err) {
+            setError(err.message || "Unknown error");
+
+        } finally {
+            setLoading(false);
+        }
+
+
+    }
+
+
     const value = {
         currentUserId,
         setCurrentUserId,
         trackedAnimals,
         loading,
         error,
-        fetchTrackedAnimals
+        fetchTrackedAnimals,
+        deleteTrackedAnimal
     }
     
 

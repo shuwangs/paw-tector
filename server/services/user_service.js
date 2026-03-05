@@ -24,3 +24,11 @@ export const getUserTrackedAnimal = async (userId) => {
     return rows;
 }
 
+export const deleteUserTrackedAnimal = async (user_id, animal_id) => {
+    const {rowCount} = await pool.query(`
+        DELETE FROM sighings
+        WHERE user_id = $1 AND animal_id = $2
+        `, [user_id, animal_id])
+
+    return rowCount;
+}
