@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import { useCurrentUser } from "../context/CurrentUserContext.jsx";
 import RecordAnimalCard from './RecordAnimalCard.jsx';
-import NewAnimalForm from './NewAnimalForm.jsx';
+import SightingForm from './SightingForm.jsx';
 
 const RecordAnimalsList = () => {
     const { trackedAnimals, loading, error } = useCurrentUser();
@@ -14,7 +14,7 @@ const RecordAnimalsList = () => {
                 <h2>My Records 📋 </h2>
                 <button onClick={() =>setShowForm(true)}> Add New</button>
                    {showForm && (
-                    <NewAnimalForm onClose={() => setShowForm(false)} />
+                    <SightingForm onClose={() => setShowForm(false)} />
                 )}
             </div>
             <div className="tracked-animal-ctn">

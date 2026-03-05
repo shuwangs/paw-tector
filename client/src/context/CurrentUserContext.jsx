@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getUsers } from "../api/userApi.js";
 
 const CurrentUserContext = createContext();
 
@@ -6,9 +7,11 @@ export const CurrentUserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(1);
     const [trackedAnimals, setTrackedAnimals] = useState([])
+
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     
+
     const fetchTrackedAnimals = async (userId) => {
         if(!userId) return;
         setLoading(true);

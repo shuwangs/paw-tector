@@ -12,10 +12,11 @@
 3. My record page
 - [] fetch users, choose who users.
 - [X] fetch /api/users/1/sightings: GET /api/users/1/sightings
+- [ ] add sightings flow: if no animal display add new Animal, if animallist is not empty ask new add animal or and sightings for existing animals 
 - [ ] add sighting form
 - [ ] Post to db /api/users/1/sightings
 - [ ] update UI list
-- [ ] delete animal record
+- [X] delete animal record
 - [ ] update animal record
 
 4. Use Context 
