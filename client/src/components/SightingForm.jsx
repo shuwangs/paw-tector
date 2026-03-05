@@ -1,4 +1,5 @@
 import React,{useState} from "react"
+import './SightingForm.css'
 const SightingForm = ({onClose}) => {
     // TODOS
     // if the animal is in the db, add sightings only
@@ -33,20 +34,20 @@ const SightingForm = ({onClose}) => {
 
     return (
         <form onSubmit={handleSubmitForm}>
-            <div>
+            <div className="modal-title">
                 <h1>Add New Animal 🐾</h1>
                 <button type="button" onClick={onClose}> x</button>
             </div>
 
-            <div>
-                <div>
+            <div className="modal-content">
+                <div className="nickname-ctn">
                     <label>
                         NickName*
                         <input type="text" name="nickname" value={form.nickname} onChange={handleChange}/>
                     </label>
                 </div>
 
-                <div>
+                <div className="breed-ctn">
                     <label>
                         Species*
                         <select name="species" defaultValue={form.species}  onChange={handleChange}>
@@ -61,7 +62,7 @@ const SightingForm = ({onClose}) => {
                         <input name="breed" type="text" placeholder="Optional"  />
                     </label>
                 </div>
-                <div>
+                <div className="found-details">
                  
                         <label>
                             Location*
@@ -93,9 +94,9 @@ const SightingForm = ({onClose}) => {
                 </div>
 
             </div>
-            <div>            
-                <button type="submit">Create Animal & Add Sighting</button>
-                <button type="button" onClick={handleClearForm}>Cancel</button>
+            <div className="btn-group">            
+                <button className="primary-btn" type="submit">Create Animal & Add Sighting</button>
+                <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
             </div>
 
         </form>
