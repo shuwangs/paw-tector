@@ -32,7 +32,6 @@ router.delete('/:userId/tracked-animals/:individualId', async (req, res) => {
         const userId = Number(req.params.userId);
         const animalId = Number(req.params.individualId);
         const deletedCount = await userServie.deleteUserTrackedAnimal(userId, animalId);
-        console.log("user: ", req.params.userId ," deleted animal are: ", tracked_animals);
         res.json({
             message: "Tracked animal deleted",
             deleted: deletedCount

@@ -26,8 +26,8 @@ export const getUserTrackedAnimal = async (userId) => {
 
 export const deleteUserTrackedAnimal = async (user_id, animal_id) => {
     const {rowCount} = await pool.query(`
-        DELETE FROM sighings
-        WHERE user_id = $1 AND animal_id = $2
+        DELETE FROM sightings
+        WHERE user_id = $1 AND individual_id = $2
         `, [user_id, animal_id])
 
     return rowCount;

@@ -37,8 +37,10 @@ export const CurrentUserProvider = ({children}) => {
 
     const deleteTrackedAnimal = async (user_id, animal_id) => {
         const userId = Number(user_id);
+        console.log(userId);
         const individualId = Number(animal_id);
 
+        console.log(animal_id);
 
         setLoading(true);
         setError(null);

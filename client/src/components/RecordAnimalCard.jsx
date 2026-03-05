@@ -4,9 +4,9 @@ import { useCurrentUser } from "../context/CurrentUserContext";
 import "./DisplayCard.css";
 
 const RecordAnimalCard = ({animal}) => {
-    const { deleteTrackedAnimal } = useCurrentUser();
+    const { currentUserId, deleteTrackedAnimal } = useCurrentUser();
     const handleDelete = () => {
-        deleteTrackedAnimal(animal.individual_id);
+        deleteTrackedAnimal( currentUserId, animal.individual_id);
     };
     return (
         <div className="animal-card">
