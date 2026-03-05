@@ -12,4 +12,5 @@ app.use("/api/sightings", sightingsRouter);
 
 app.use("/api/users", userRouter);
 
+
 export default app;

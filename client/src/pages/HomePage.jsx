@@ -43,7 +43,7 @@ const HomePage = () => {
                     <div className="card discription-card">
                         <h2>📸</h2>
                         <h3>Spot & Report</h3>
-                        <p>See a stray animal? Log its location and details to help track it.</p>
+                        <p>See a stray animal? Log  its location and details to help track it.</p>
                     </div>  
 
                     <div className="card discription-card">

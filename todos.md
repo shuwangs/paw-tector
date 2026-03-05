@@ -10,7 +10,7 @@
 - [X] display it with .map():  nickname, animal type, address, health_status / need_help, sighted_at
 
 3. My record page
-- [ ] fetch users, choose who users.
+- [] fetch users, choose who users.
 - [ ] fetch /api/users/1/sightings: GET /api/users/1/sightings
 - [ ] add sighting form
 - [ ] Post to db /api/users/1/sightings
@@ -23,6 +23,7 @@
   -  click → setCurrentUser
 
 1. optional
+- [ ] paging
 - [ ] discovery map view
 - [ ] Home page stats  GET /api/stats
 - [ ] My record page count of my sightings

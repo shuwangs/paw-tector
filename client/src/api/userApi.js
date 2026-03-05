@@ -6,3 +6,8 @@ export const getUsers = async () => {
 
     return response.json();
 };
+
+
+// export const getUserTrackedAnimal = async() => {
+
+// }

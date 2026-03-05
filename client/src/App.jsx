@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage';
 import TopNav from './pages/TopNav';
 import MyRecords from './pages/MyRecords';
 import { DiscoverProvider } from "./context/DiscoverContext";
-
+import { CurrentUserProvider } from './context/CurrentUserContext';
 import './App.css'
 
 
@@ -22,7 +22,10 @@ function App() {
             <DiscoverProvider>
               <DiscoverPage />
             </DiscoverProvider>} />
-          <Route path='/records' element={<MyRecords />} />
+          <Route path='/records' element={ 
+            <CurrentUserProvider>
+              <MyRecords />
+            </CurrentUserProvider>} />
           
         </Routes>
     </div>
