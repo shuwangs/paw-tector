@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const CurrentUserContext = createContext();
 
 export const CurrentUserProvider = ({children}) => {
-
+    const [users, setUsers] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(1);
     const [trackedAnimals, setTrackedAnimals] = useState([])
     const [error, setError] = useState(null);
@@ -30,6 +30,23 @@ export const CurrentUserProvider = ({children}) => {
         }
 
     }
+
+    const loadUsers = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await getUsers();
+            setUsers(res);
+        } catch(err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() =>{
+        loadUsers();
+    },[])
 
     useEffect(() => {
         fetchTrackedAnimals(currentUserId);
@@ -68,6 +85,7 @@ export const CurrentUserProvider = ({children}) => {
 
 
     const value = {
+        users,
         currentUserId,
         setCurrentUserId,
         trackedAnimals,

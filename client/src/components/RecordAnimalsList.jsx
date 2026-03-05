@@ -2,15 +2,20 @@ import React, {useState, useEffect} from 'react';
 
 import { useCurrentUser } from "../context/CurrentUserContext.jsx";
 import RecordAnimalCard from './RecordAnimalCard.jsx';
+import NewAnimalForm from './NewAnimalForm.jsx';
 
 const RecordAnimalsList = () => {
     const { trackedAnimals, loading, error } = useCurrentUser();
+    const [showForm, setShowForm] = useState(false);
 
     return (
         <div>        
             <div className='myrecord-header'> 
                 <h2>My Records 📋 </h2>
-                <button> Add New</button>
+                <button onClick={() =>setShowForm(true)}> Add New</button>
+                   {showForm && (
+                    <NewAnimalForm onClose={() => setShowForm(false)} />
+                )}
             </div>
             <div className="tracked-animal-ctn">
                 {trackedAnimals.map((trackedAnimal,) => (

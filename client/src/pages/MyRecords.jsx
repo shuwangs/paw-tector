@@ -6,29 +6,7 @@ import RecordAnimalsList from "../components/RecordAnimalsList.jsx";
 import '../App.css';
 
 const MyRecords = () => {
-    const [users, setUsers] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-
-    const { currentUserId, setCurrentUserId} = useCurrentUser();
-    
-    useEffect(() =>{
-        const loadUsers = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const res = await getUsers();
-                setUsers(res);
-            } catch(err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        loadUsers();
-
-    },[])
+    const {users, currentUserId, setCurrentUserId, loading, error} = useCurrentUser();
 
     return (
         <div>
@@ -75,7 +53,6 @@ const MyRecords = () => {
 
             <div className="my-records display">
                 <RecordAnimalsList />
-
             </div>
         
         </div>
