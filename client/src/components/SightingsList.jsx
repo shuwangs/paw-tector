@@ -1,28 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import SightingCard from './SightingCard.jsx';
+import { useDiscover } from "../context/DiscoverContext";
 
 const SightingsList = () => {
-    const [sightings, setSightings] = useState([]);
-
-    useEffect(() => {
-        const fetchSightings = async () => {
-        try {
-            const response = await fetch("/api/sightings");
-
-            if (!response.ok) {
-            throw new Error("fetch sightings error");
-            }
-
-            const data = await response.json();
-            console.log(data);
-            setSightings(data);
-        } catch (err) {
-            console.error(err);
-        }
-        };
-
-        fetchSightings();
-    }, []);
+    const { sightings, loading, error } = useDiscover();
 
     return (
         <div className='sightingsList-ctn'>
