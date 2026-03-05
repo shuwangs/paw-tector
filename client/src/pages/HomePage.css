@@ -1,0 +1,81 @@
+.hero {
+    background-color: var(--primary_accent_color);
+    padding: 25px 30px;
+}
+.hero h1 {
+    color : var(--text-color);
+}
+.hero p {
+    color: white;
+}
+.btn-group {
+    display: flex;
+    gap:20px;
+    justify-content: center;
+}
+.hero button {
+    padding: 8px 15px;
+    border-radius: 15px;
+    font-size: 1rem;
+
+}
+
+.hero button:hover {
+    background-color: var(--primary_action_color);
+}
+
+
+.stats-ctn {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 50px 20vw;
+}
+
+.stats-card{
+    display: flex;
+    flex-direction:column;
+    gap:5px
+}
+.stats-icon {
+    font-size: 2rem;
+}
+
+.stats-icon, .stats-count {
+    font-size: 2rem;
+}
+.stats-count {
+    color: var(--primary_accent_color);
+    font-weight: bolder;
+}
+.stats-class {
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.description-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.discription-card {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: var(--text-color);
+    border-radius: 30px;
+}
+
+.discription-card h2 {
+    font-size: 3rem;
+    background-color: var(--bg-secondary);
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}

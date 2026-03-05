@@ -3,14 +3,12 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   --bg-primary: #f0fdf4;
+  --bg-secondary: #d1fae5;
+  --secondary_accent_color: #10b981;
+  --primary_accent_color: #047857;
 
-  /* --primary_action_color: #10b981; */
-  /* --secondary_action_color: #047857; */
-
-  --text_color: #1f2937;
+  --text-color: #0f2f2a;
   --primary_action_color: #22c55e;
   --secondary_action_color: #16a34a;
   font-family: 'Nunito';
@@ -18,4 +16,17 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+   
+
+  --status-healthy-text: #065f46;
+  --status-healthy-bg: #d1fae5;
+  --status-sick-text: Red;
+  --status-sick-bg: #f4acb7;
+  --status-injured-text:Red;
+  --status-injured-bg: #f4acb7;
+  --status-unknown-text: #92400e;
+  --status-unknown-bg: #fde68a;
+
+
 }

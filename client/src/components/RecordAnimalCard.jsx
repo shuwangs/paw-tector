@@ -1,8 +1,9 @@
 import React from "react";
+import "./DisplayCard.css";
 
 const RecordAnimalCard = () => {
     return (
-        <div className="animal">
+        <div className="animal-card">
             <div className="animal-icon">Animal</div>
             <div className="animal-details">
                 <div className="status-ctn">name</div>
@@ -10,7 +11,7 @@ const RecordAnimalCard = () => {
                 <div className="sighting-time">dont know what to put yeat</div>
             </div>
 
-            <div className='edit-ctn'>
+            <div className='btn-ctn'>
                 <button>👁️</button>
                 <button>✏️</button>
                 <button>🗑️</button>
