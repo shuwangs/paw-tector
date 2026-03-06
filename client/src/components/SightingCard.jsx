@@ -10,6 +10,8 @@ const SightingCard = ({sighting}) => {
                 <div className="details-top">
                     {/* TODO Replace with animalName */}
                     <div className="name-ctn">{sighting.id}</div>
+                    <div className="name-ctn">{sighting.nickname}</div>
+
                     <div className={`status-ctn ${sighting.health_status}`} >{sighting.health_status}</div>
                 </div>
 

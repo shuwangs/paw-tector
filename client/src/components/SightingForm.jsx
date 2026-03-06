@@ -65,6 +65,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 };
                 const newSighting = await addNewSightingToExistingAnimal(currentUserId, payload);
                 console.log(newSighting);
+                onClose();
 
             }
         } catch (error) {
