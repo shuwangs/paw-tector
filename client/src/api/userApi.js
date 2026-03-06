@@ -8,7 +8,7 @@ export const getUsers = async () => {
 };
 
 export const getUserStats = async (userId) =>{
-    const response = await fetch(`/api/users/${userId}/stats`);
+    const response = await fetch(`/api/users/${Number(userId)}/stats`);
     if(!response.ok) {
         throw new Error(`Fetch user stats failed (${response.status})`);
     }

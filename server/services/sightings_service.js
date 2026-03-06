@@ -23,6 +23,6 @@ export const getSightingsStats = async () => {
     (SELECT COUNT(DISTINCT address) FROM sightings) AS locations;
     `
     )
-    console.log(rows);
+    // console.log(rows);
     return rows [0];
 }

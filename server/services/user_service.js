@@ -50,7 +50,7 @@ export const createAnimalWithSighting = async (user_id, form) => {
         sighted_at,
         notes
     } = form;
-    console.log( nickname);
+    // console.log( nickname);
     const client = await pool.connect();
     
     try{
@@ -63,14 +63,14 @@ export const createAnimalWithSighting = async (user_id, form) => {
             FROM animal_types
             WHERE name = $1`, [species]
         );
-        console.log( typeRes);
+        // console.log( typeRes);
 
         if (typeRes.rows.length === 0) {
             throw new Error("Invalid animal type");
         }
 
         const animalId = typeRes.rows[0].id;
-        console.log( animalId);
+        // console.log( animalId);
 
         // console.log("animal_id is: ", animalId)
         // 2 insert into individual table
@@ -87,7 +87,7 @@ export const createAnimalWithSighting = async (user_id, form) => {
 
         // Get individual ID 
         const individualId = individualRes.rows[0].id;
-        console.log("individualId is: ", individualId)
+        // console.log("individualId is: ", individualId)
 
         //Insert into sightings
         const sightingsRes = await client.query(
@@ -114,9 +114,9 @@ export const createAnimalWithSighting = async (user_id, form) => {
 
 export const addNewSightingToExistingAnimal = async (user_id, form) => {
     const { individual_id, address, health_status, sighted_at, notes } = form;
-    console.log("I am at the db chekcing individual id: ", individual_id)
-    console.log(form);
-    console.log(user_id);
+    // console.log("I am at the db chekcing individual id: ", individual_id)
+    // console.log(form);
+    // console.log(user_id);
 
     const { rows } = await pool.query(
         `
@@ -133,8 +133,25 @@ export const addNewSightingToExistingAnimal = async (user_id, form) => {
         `,
     [user_id, individual_id, address, health_status, sighted_at, notes]
   );
-    console.log("I am at the db chekcing after insert rows: ", rows)
+    // console.log("I am at the db chekcing after insert rows: ", rows)
 
   return rows[0];
 
+}
+
+export const getUserStats = async (user_id) =>{
+    console.log("I am at the db chekcing stats id: ", user_id)
+
+    const {rows} = await pool.query(
+        `SELECT
+        COUNT (*) as total_sightings,
+        COUNT (DISTINCT address) as locations ,
+        COUNT (DISTINCT individual_id) as animals_tracked 
+        FROM sightings WHERE user_id = $1
+        `,
+        [user_id]
+    )
+    console.log("I am at the db get user stats after insert rows: ", rows)
+
+    return rows[0];
 }

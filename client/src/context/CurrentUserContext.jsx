@@ -7,7 +7,11 @@ export const CurrentUserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(1);
     const [trackedAnimals, setTrackedAnimals] = useState([])
-    const [currentUserStats, setCurrentUserStats] = useState(null);
+    const [currentUserStats, setCurrentUserStats] = useState({
+        animals_tracked: 0,
+        total_sightings:0,
+        locations: 0
+    });
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -68,7 +72,7 @@ export const CurrentUserProvider = ({children}) => {
 
     useEffect(() =>{
         loadUsers();
-        fetchCurrentUserStats();
+        fetchCurrentUserStats(currentUserId);
     },[])
 
     useEffect(() => {

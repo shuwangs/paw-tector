@@ -31,18 +31,18 @@ const MyRecords = () => {
 
                 <div className="my-stats">
                     <div className="stats-ctn">
-                        <p>0</p>
-                        <p>Total Sighints</p>
+                        <p>{currentUserStats.total_sightings}</p>
+                        <p>Total Sightings</p>
 
                     </div>
 
                     <div className="stats-ctn">
-                        <p>0</p>
+                        <p>{currentUserStats.animals_tracked}</p>
                         <p>Total Animals</p>
                     </div>
 
                     <div className="stats-ctn">
-                        <p>0</p>
+                        <p>{currentUserStats.locations} </p>
                         <p>Locations</p>
                     </div>
 
