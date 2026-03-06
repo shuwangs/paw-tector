@@ -11,3 +11,18 @@ export const getAllSightings = async () => {
     )
     return rows;
 }
+
+export const getSightingsStats = async () => {
+    console.log("testing: reached getSightingsStats in sightings service")
+    const {rows} = await pool.query(
+    `
+    SELECT
+    (SELECT COUNT(DISTINCT individual_id) FROM sightings) AS animals_tracked,
+    (SELECT COUNT(*) FROM sightings) AS total_sightings,
+    (SELECT COUNT(*) FROM users) AS total_volunteers,
+    (SELECT COUNT(DISTINCT address) FROM sightings) AS locations;
+    `
+    )
+    console.log(rows);
+    return rows [0];
+}

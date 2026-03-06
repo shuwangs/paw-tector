@@ -6,7 +6,7 @@ export const DiscoverProvider = ({children}) => {
     const [sightings, setSightings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null); 
-
+    const [stats, setStats ] = useState(null);
     const fetchSightings = async () => {    
         setLoading(true);
         setError(null);
@@ -27,21 +27,29 @@ export const DiscoverProvider = ({children}) => {
         }
     };
 
+    const fetchSightingsStats  = async () => {
+        const res = await fetch("/api/sightings/stats");
+        const data = await res.json();
+        console.log(data);
+        setStats(data);
+    }
+
     useEffect(() => {
         fetchSightings();
+        fetchSightingsStats();
     }, []);
 
     const value = {
         sightings,
+        stats,
         setSightings,
         loading,
         error,
         fetchSightings,
+        fetchSightingsStats
     };
 
     return <DiscoverContext.Provider value={value}>{children}</DiscoverContext.Provider>;
-
-
 
 
 

@@ -17,7 +17,11 @@ function App() {
 
       <div className='app-container'>
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={
+            <DiscoverProvider>
+              <HomePage />
+            </DiscoverProvider>
+            } />
           <Route path = '/discover' element={
             <DiscoverProvider>
               <DiscoverPage />

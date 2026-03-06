@@ -1,7 +1,10 @@
 
-import React from "react";
+import React, {useContext} from "react";
+import { useDiscover  } from "../context/DiscoverContext";
 import './HomePage.css'
 const HomePage = () => {
+    const {stats} = useDiscover();
+    console.log(stats);
     return (
         <div>
         
@@ -19,19 +22,25 @@ const HomePage = () => {
             <div className="stats-ctn">
                 <div className="stats-card"> 
                     <div className="stats-icon">🐕</div>
-                    <div className="stats-count"> 3</div>
+                    <div className="stats-count">{stats.animals_tracked}</div>
                     <div className="stats-class"> Animal Tracked</div>
                 </div>
 
                 <div className="stats-card">
                     <div className="stats-icon"> 👀</div>
-                    <div className="stats-count"> 3</div>
+                    <div className="stats-count">{stats.total_sightings}</div>
                     <div className="stats-class">Total Sightings</div>
                 </div>
 
                 <div className="stats-card">
+                    <div className="stats-icon">❣️</div>
+                    <div className="stats-count"> {stats.total_volunteers}</div>
+                    <div className="stats-class">Volunteers</div>
+                </div>
+
+                <div className="stats-card">
                     <div className="stats-icon">📍</div>
-                    <div className="stats-count"> 3</div>
+                    <div className="stats-count"> {stats.locations}</div>
                     <div className="stats-class">Locations</div>
                 </div>
             </div>
