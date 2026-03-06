@@ -12,12 +12,17 @@
 3. My record page
 - [] fetch users, choose who users.
 - [X] fetch /api/users/1/sightings: GET /api/users/1/sightings
-- [ ] add sightings flow: if no animal display add new Animal, if animallist is not empty ask new add animal or and sightings for existing animals 
-- [ ] add sighting form
-- [ ] Post to db /api/users/1/sightings
+- [X] add sightings flow: if no animal display add new Animal, if animallist is not empty ask new add animal or and sightings for existing animals 
+- [X] add sighting form
+- [X] Post to db /api/users/1/sightings
 - [ ] update UI list
 - [X] delete animal record
 - [ ] update animal record
+
+3.2 individual  profile
+- [ ] count of how many times each individual has been sighted
+- [ ]first sighting date
+- [ ] most recent sighting date
 
 4. Use Context 
 - [ ] Current User Context
@@ -26,8 +31,23 @@
   - [ ] click → setCurrentUser
 - [ ] discovery page context 
 
-5. optional
+5. testing
+- [ ] add testing
+- [ ] frontend form validation
+- [ ] required fields
+- [ ] email type validation
+- [ ] date/time validation
+- [X] backend request validation
+- [ ] invalid user id
+- [X] invalid individual id
+- [ ] invalid health status
+- [ ] missing required fields
+- [ ] show user-visible error messages in UI
+- [ ] show empty/loading/error states for fetches
+
+6. optional
+- [ ] Let users search for sightings within a certain date range
 - [ ] paging
 - [ ] discovery map view
-- [ ] Home page stats  GET /api/stats
-- [ ] My record page count of my sightings
+- [X] Home page stats  GET /api/stats
+- [X] My record page count of my sightings

@@ -4,10 +4,14 @@ import { useCurrentUser } from "../context/CurrentUserContext";
 import "./DisplayCard.css";
 
 const RecordAnimalCard = ({animal}) => {
-    const { currentUserId, deleteTrackedAnimal } = useCurrentUser();
+    const { currentUserId, deleteTrackedAnimal , animalOnEditing, setAnimalOnEditing, } = useCurrentUser();
     const handleDelete = () => {
         deleteTrackedAnimal( currentUserId, animal.individual_id);
     };
+    const handleEdit = () =>{
+
+    }
+
     return (
         <div className="animal-card">
             <div className="animal-icon">Cat</div>
@@ -20,7 +24,7 @@ const RecordAnimalCard = ({animal}) => {
 
             <div className='btn-ctn'>
                 <button>👁️</button>
-                <button>✏️</button>
+                <button onClick={handleEdit}>✏️</button>
                 <button onClick={handleDelete}>🗑️</button>
             </div>
 
