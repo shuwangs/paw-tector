@@ -46,10 +46,10 @@ form input {
     border-radius: 5px;
 }
 
-form .primary-btn {
+/* form .primary-btn {
     font-size: 1.1rem;
     padding: 5px 25px;
-}
+} */
 
 .breed-ctn {
     display: flex;

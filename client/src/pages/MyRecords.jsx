@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from "react";
-import { getUsers } from "../api/userApi.js";
 import { useRoutes } from "react-router-dom";
 import { useCurrentUser } from "../context/CurrentUserContext.jsx";
 import RecordAnimalsList from "../components/RecordAnimalsList.jsx";
