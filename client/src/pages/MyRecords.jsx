@@ -5,7 +5,7 @@ import RecordAnimalsList from "../components/RecordAnimalsList.jsx";
 import '../App.css';
 
 const MyRecords = () => {
-    const {users, currentUserId, setCurrentUserId, loading, error} = useCurrentUser();
+    const {users, currentUserId, setCurrentUserId, currentUserStats, loading, error} = useCurrentUser();
 
     return (
         <div>

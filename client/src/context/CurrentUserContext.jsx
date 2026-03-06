@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUsers } from "../api/userApi.js";
+import { getUsers, getUserStats } from "../api/userApi.js";
 
 const CurrentUserContext = createContext();
 
@@ -7,6 +7,7 @@ export const CurrentUserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(1);
     const [trackedAnimals, setTrackedAnimals] = useState([])
+    const [currentUserStats, setCurrentUserStats] = useState(null);
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -47,8 +48,27 @@ export const CurrentUserProvider = ({children}) => {
         }
     }
 
+    const fetchCurrentUserStats = async (userId) => {
+        if(!userId) return;
+        setLoading(true);
+        setError(null);
+
+        try {
+            const res = await getUserStats(userId);
+            setCurrentUserStats(res);
+        } catch(err) {
+            setError(err.message || "Unknown error");
+
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+
     useEffect(() =>{
         loadUsers();
+        fetchCurrentUserStats();
     },[])
 
     useEffect(() => {
@@ -90,6 +110,7 @@ export const CurrentUserProvider = ({children}) => {
     const value = {
         users,
         currentUserId,
+        currentUserStats,
         setCurrentUserId,
         trackedAnimals,
         setTrackedAnimals,

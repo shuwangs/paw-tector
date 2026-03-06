@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
-
+import {getSightingsStats} from '../api/sightingsApi.js'
 const DiscoverContext = createContext(null);
 
 export const DiscoverProvider = ({children}) => {
@@ -28,10 +28,18 @@ export const DiscoverProvider = ({children}) => {
     };
 
     const fetchSightingsStats  = async () => {
-        const res = await fetch("/api/sightings/stats");
-        const data = await res.json();
-        console.log(data);
-        setStats(data);
+        setLoading(true);
+        setError(null);
+        try {
+            const data =  await getSightingsStats()
+            console.log(data);
+
+            setStats(data);
+        } catch (err) {
+            setError(err.message || "Unknown error");
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -46,7 +54,6 @@ export const DiscoverProvider = ({children}) => {
         loading,
         error,
         fetchSightings,
-        fetchSightingsStats
     };
 
     return <DiscoverContext.Provider value={value}>{children}</DiscoverContext.Provider>;
