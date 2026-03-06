@@ -6,7 +6,12 @@ export const DiscoverProvider = ({children}) => {
     const [sightings, setSightings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null); 
-    const [stats, setStats ] = useState(null);
+    const [stats, setStats ] = useState( 
+        {animals_tracked: 0,
+        total_sightings: 0,
+        total_volunteers: 0,
+        locations: 0});
+
     const fetchSightings = async () => {    
         setLoading(true);
         setError(null);
