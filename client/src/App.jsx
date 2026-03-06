@@ -4,6 +4,8 @@ import DiscoverPage from './pages/DiscoverPage';
 import HomePage from './pages/HomePage';
 import TopNav from './pages/TopNav';
 import MyRecords from './pages/MyRecords';
+import { DiscoverProvider } from "./context/DiscoverContext";
+import { CurrentUserProvider } from './context/CurrentUserContext';
 import './App.css'
 
 
@@ -16,8 +18,14 @@ function App() {
       <div className='app-container'>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path = '/discover' element={<DiscoverPage />} />
-          <Route path='/records' element={<MyRecords />} />
+          <Route path = '/discover' element={
+            <DiscoverProvider>
+              <DiscoverPage />
+            </DiscoverProvider>} />
+          <Route path='/records' element={ 
+            <CurrentUserProvider>
+              <MyRecords />
+            </CurrentUserProvider>} />
           
         </Routes>
     </div>

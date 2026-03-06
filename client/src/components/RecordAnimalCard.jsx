@@ -1,24 +1,31 @@
 import React from "react";
+import { useCurrentUser } from "../context/CurrentUserContext";
+
 import "./DisplayCard.css";
 
-const RecordAnimalCard = () => {
+const RecordAnimalCard = ({animal}) => {
+    const { currentUserId, deleteTrackedAnimal } = useCurrentUser();
+    const handleDelete = () => {
+        deleteTrackedAnimal( currentUserId, animal.individual_id);
+    };
     return (
         <div className="animal-card">
-            <div className="animal-icon">Animal</div>
+            <div className="animal-icon">Cat</div>
             <div className="animal-details">
-                <div className="status-ctn">name</div>
-                <div className="location"><span className="location-icon">📍</span> last-seen</div>
-                <div className="sighting-time">dont know what to put yeat</div>
+                <div className="name-ctn">{animal.name}</div>
+                <div className="status-ctn">{animal.health_status}</div>
+                <div className="species">{animal.animal_type} • {animal.breed_name}</div>
+                <div className="location"><span className="location-icon">📍</span> {animal.address}</div>
             </div>
 
             <div className='btn-ctn'>
                 <button>👁️</button>
                 <button>✏️</button>
-                <button>🗑️</button>
+                <button onClick={handleDelete}>🗑️</button>
             </div>
 
         </div>
     )
-}
+};
 
 export default RecordAnimalCard;

@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -7,7 +7,7 @@
   --bg-secondary: #d1fae5;
   --secondary_accent_color: #10b981;
   --primary_accent_color: #047857;
-
+  --border-line: #e5e5e5
   --text-color: #0f2f2a;
   --primary_action_color: #22c55e;
   --secondary_action_color: #16a34a;
@@ -16,8 +16,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-   
 
   --status-healthy-text: #065f46;
   --status-healthy-bg: #d1fae5;
@@ -28,5 +26,27 @@
   --status-unknown-text: #92400e;
   --status-unknown-bg: #fde68a;
 
-
 }
+
+.primary-btn { 
+  background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(255,143,171,0.4);
+  font-size: 1.2rem;
+  padding: 0.75em 1.5em;
+  color: #fff;
+  border:none;
+}
+
+.secondary-btn {
+  background: #fff;
+  border: 2px solid #22c55e;
+  border-radius: 20px;
+}  
+
+.input-style {
+  border: 2px solid #22c55e;
+  border-radius: 15px;
+  background: #fff;
+}
+

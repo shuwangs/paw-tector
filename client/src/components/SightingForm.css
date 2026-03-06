@@ -1,0 +1,70 @@
+/* button {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+} */
+
+form {
+    max-width: 450px;
+    border: 2px solid var( --primary_accent_color);
+    border-radius: 30px;
+    padding: 20px 25px;
+    background-color: var(--secondary-primary);
+    font-size: 1.1rem;
+}
+
+form .modal-title{
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--bg-secondary);
+
+}
+form .modal-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    gap: 8px;
+    align-items:  flex-start;
+    justify-content:flex-start;
+}
+
+form label {
+    font-family: 'Nunito';
+    font-size: 1.2rem;
+}
+
+form input {
+    height: 25px;
+    border: 1px solid var(--secondary_action_color);
+    border-radius: 5px;
+}
+
+/* form .primary-btn {
+    font-size: 1.1rem;
+    padding: 5px 25px;
+} */
+
+.breed-ctn {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+.found-details {
+    margin-top: 10px;
+    border: 1px solid var(--border-line);
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+form .secondary-btn {
+    font-size: 1.1rem;
+    padding: 5px 25px;
+}
+
