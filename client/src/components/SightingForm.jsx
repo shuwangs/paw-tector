@@ -1,10 +1,11 @@
 import React,{useContext, useState} from "react";
-import { createAnimalWithSighting } from "../api/sightingsApi";
+import { createAnimalWithSighting, addNewSightingToExistingAnimal } from "../api/sightingsApi";
 import { useCurrentUser } from "../context/CurrentUserContext";
 import './SightingForm.css'
 const SightingForm = ({onClose, mode, selectedAnimal}) => {
     // TODOS
     // if the animal is in the db, add sightings only
+    console.log("selected animal is: ", selectedAnimal);
     const {currentUserId, setTrackedAnimals} = useCurrentUser();
 
     const initialForm = {
@@ -36,28 +37,42 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
     
     const handleClearForm = () => setForm(initialForm);
     const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
+        const { name, checked } = e.target;
 
-    setForm((prev) => ({
-        ...prev,
-        [name]: checked
-    }));
+        setForm((prev) => ({
+            ...prev,
+            [name]: checked
+        }));
     };
 
     const handleSubmitForm = async (e) => {  
         e.preventDefault();
         try {
             if (mode == "new") {
-                 const newAnimal = await createAnimalWithSighting(currentUserId, form);
+                const newAnimal = await createAnimalWithSighting(currentUserId, form);
                 console.log(newAnimal);
                 onClose();
                 setTrackedAnimals(prev => [...prev, newAnimal]);    
+            } else if (mode === "existing") {
+                console.log(mode);
+                const payload = {
+                    // user_id: currentUserId,
+                    individual_id: selectedAnimal.individual_id,
+                    address: form.location,
+                    health_status: form.health_status,
+                    sighted_at: form.sighted_at,
+                    notes: form.notes,
+                };
+                const newSighting = await addNewSightingToExistingAnimal(currentUserId, payload);
+                console.log(newSighting);
+
             }
         } catch (error) {
             console.error(error);
         }
     }
     
+
 
     return (
         <form onSubmit={handleSubmitForm}>
@@ -182,11 +197,19 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 </div>
 
             </div>
-            <div className="btn-group">            
-                <button className="primary-btn" type="submit">Create Animal & Add Sighting</button>
-                <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
-            </div>
+            {   mode ==- "new" &&
+                <div className="btn-group">            
+                    <button className="primary-btn" type="submit">Create Animal & Add Sighting</button>
+                    <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
+                </div>
+            }    
 
+            {   mode === "existing" &&
+                <div className="btn-group">            
+                    <button className="primary-btn" type="submit">Add New Sighting</button>
+                    <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
+                </div>
+            }    
         </form>
     )
 }

@@ -109,9 +109,32 @@ export const createAnimalWithSighting = async (user_id, form) => {
         client.release();
     }
     
-        
-        
+}
 
 
+export const addNewSightingToExistingAnimal = async (user_id, form) => {
+    const { individual_id, address, health_status, sighted_at, notes } = form;
+    console.log("I am at the db chekcing individual id: ", individual_id)
+    console.log(form);
+    console.log(user_id);
+
+    const { rows } = await pool.query(
+        `
+        INSERT INTO sightings (
+        user_id,
+        individual_id,
+        address,
+        health_status,
+        sighted_at,
+        note
+        )
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *
+        `,
+    [user_id, individual_id, address, health_status, sighted_at, notes]
+  );
+    console.log("I am at the db chekcing after insert rows: ", rows)
+
+  return rows[0];
 
 }

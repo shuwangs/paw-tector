@@ -24,3 +24,21 @@ export const createAnimalWithSighting = async (user_id, form) => {
   console.log(data);
   return data;
 };
+
+export const addNewSightingToExistingAnimal = async (user_id, form) => {
+  const response = await fetch(`/api/users/${Number(user_id)}/sightings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(form),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create animal");
+  }
+  const data = await response.json();
+  console.log(data);
+  return data;
+
+}
