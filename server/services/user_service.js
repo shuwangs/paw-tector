@@ -13,7 +13,7 @@ export const getUserTrackedAnimal = async (userId) => {
     const {rows} = await pool.query(`
         SELECT DISTINCT ON(s.individual_id)
         s.user_id, s.individual_id, s.sighted_at, s.health_status,
-        s.need_help, at.name AS animal_type,i.nickname AS name, i.breed_name, i.color, i.age_group
+        s.need_help, at.name AS animal_type,i.nickname, i.breed_name, i.color, i.age_group
         FROM sightings s
         JOIN individuals i ON s.individual_id = i.id
         JOIN animal_types at ON i.type_id = at.id
@@ -33,14 +33,7 @@ export const deleteUserTrackedAnimal = async (user_id, animal_id) => {
     return rowCount;
 }
 
-// export const deleteUserTrackedAnimal = async (user_id, animal_id) => {
-//     const {rowCount} = await pool.query(`
-//         DELETE FROM sightings
-//         WHERE user_id = $1 AND individual_id = $2
-//         `, [user_id, animal_id])
 
-//     return rowCount;
-// }
 export const createAnimalWithSighting = async (user_id, form) => {
     console.log("calling create animal with sightings")
     const  {
@@ -107,7 +100,8 @@ export const createAnimalWithSighting = async (user_id, form) => {
             [individualId, user_id, location, health_status, sighted_at, notes]
         );
         await client.query("COMMIT");
-        return sightingsRes.rows[0];
+        return individualRes.rows[0];
+
     } catch(err) {
         await client.query("ROLLBACK");
         throw err;

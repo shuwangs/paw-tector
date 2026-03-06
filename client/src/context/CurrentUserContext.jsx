@@ -92,6 +92,7 @@ export const CurrentUserProvider = ({children}) => {
         currentUserId,
         setCurrentUserId,
         trackedAnimals,
+        setTrackedAnimals,
         loading,
         error,
         fetchTrackedAnimals,
