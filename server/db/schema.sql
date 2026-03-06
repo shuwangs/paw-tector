@@ -46,8 +46,8 @@ CREATE TABLE sightings (
     user_id INTEGER NOT NULL REFERENCES users(id),
     -- address
     address TEXT NOT NULL,
-    zipcode VARCHAR(20) NOT NULL,
-    state VARCHAR(50) NOT NULL,
+    zipcode VARCHAR(20),
+    state VARCHAR(50),
     latitude DECIMAL(9,6),
     longitude DECIMAL(9,6),
 

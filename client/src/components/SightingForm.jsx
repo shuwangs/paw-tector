@@ -1,19 +1,28 @@
-import React,{useState} from "react"
+import React,{useContext, useState} from "react";
+import { createAnimalWithSighting } from "../api/sightingsApi";
+import { useCurrentUser } from "../context/CurrentUserContext";
 import './SightingForm.css'
 const SightingForm = ({onClose}) => {
     // TODOS
     // if the animal is in the db, add sightings only
+    const {currentUserId} = useCurrentUser();
+
     const initialForm = {
         nickname: "",
         species: "",
         breed: "",
-
+        color: "",
+        age_group: "unknown",
+        is_sterilized: false,
+        is_stray: true,
         // Sighting 
         location: "",
         health_status: "healthy",
         sighted_at: "",
         notes: ""
     }
+
+
     const [form, setForm] = useState(initialForm);
 
     const handleChange = ((event) => {
@@ -25,11 +34,23 @@ const SightingForm = ({onClose}) => {
     }
     
     const handleClearForm = () => setForm(initialForm);
+    const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
 
-    const handleSubmitForm = (e) => {  
+    setForm((prev) => ({
+        ...prev,
+        [name]: checked
+    }));
+    };
+    const handleSubmitForm = async (e) => {  
         e.preventDefault();
-        // TODOS:  Post to the db
-        console.log(form);
+          try {
+            const newAnimal = await createAnimalWithSighting(currentUserId, form);
+            console.log(newAnimal);
+            onClose();
+        } catch (error) {
+        console.error(error);
+        }
     }
 
     return (
@@ -50,18 +71,61 @@ const SightingForm = ({onClose}) => {
                 <div className="breed-ctn">
                     <label>
                         Species*
-                        <select name="species" defaultValue={form.species}  onChange={handleChange}>
-                            <option >Select...</option>
-                            <option>Cat</option>
-                            <option>Dog</option>
-                            <option>Rabbit</option>
+                        <select name="species" value={form.species}  onChange={handleChange}>
+                            <option value="">Select...</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Dog">Dog</option>
+                            <option value="Rbbit">Rabbit</option>
+                            <option value="Raccoon">Raccoon</option>
+                            <option value="Others">Other</option>
                         </select>
                     </label>
-                    <label value={form.breed} onChange={handleChange}>
+                    <label >
                         Breed
-                        <input name="breed" type="text" placeholder="Optional"  />
+                        <input name="breed" value={form.breed} onChange={handleChange} type="text" placeholder="Optional"  />
                     </label>
                 </div>
+
+                <div className="color-ctn">
+                    <label>
+                        Age*
+                        <select name="age_group" value={form.age_group}  onChange={handleChange}>
+                            <option value="unknown">Unknown</option>
+                            <option value="baby">Babe</option>
+                            <option value="young">Young</option>
+                            <option value="adult">Adult</option>
+                            <option value="senior">Senior</option>
+                        </select>
+                    </label>
+                    <label >
+                        Color
+                        <input value={form.color} onChange={handleChange} name="color" type="text" placeholder="Optional"  />
+                    </label>
+                </div>
+
+
+                <div className="stray-ctn">
+                    <label>
+                        Sterilized
+                        <input
+                            type="checkbox"
+                            name="is_sterilized"
+                            checked={form.is_sterilized}
+                            onChange={handleCheckboxChange}
+                        />
+                    </label>
+
+                    <label>
+                        Is Stray
+                        <input
+                            type="checkbox"
+                            name="is_stray"
+                            checked={form.is_stray}
+                            onChange={handleCheckboxChange}
+                        />
+                    </label>
+                </div>
+
                 <div className="found-details">
                  
                         <label>
