@@ -2,10 +2,10 @@ import React,{useContext, useState} from "react";
 import { createAnimalWithSighting } from "../api/sightingsApi";
 import { useCurrentUser } from "../context/CurrentUserContext";
 import './SightingForm.css'
-const SightingForm = ({onClose}) => {
+const SightingForm = ({onClose, mode, selectedAnimal}) => {
     // TODOS
     // if the animal is in the db, add sightings only
-    const {currentUserId, trackedAnimals, setTrackedAnimals} = useCurrentUser();
+    const {currentUserId, setTrackedAnimals} = useCurrentUser();
 
     const initialForm = {
         nickname: "",
@@ -25,6 +25,7 @@ const SightingForm = ({onClose}) => {
 
     const [form, setForm] = useState(initialForm);
 
+    console.log(mode);
     const handleChange = ((event) => {
         setForm((prev)=>({ ...prev, [event.target.name]: event.target.value}));
     })
@@ -42,26 +43,31 @@ const SightingForm = ({onClose}) => {
         [name]: checked
     }));
     };
+
     const handleSubmitForm = async (e) => {  
         e.preventDefault();
-          try {
-            const newAnimal = await createAnimalWithSighting(currentUserId, form);
-            console.log(newAnimal);
-            onClose();
-            setTrackedAnimals(prev => [...prev, newAnimal]);    
+        try {
+            if (mode == "new") {
+                 const newAnimal = await createAnimalWithSighting(currentUserId, form);
+                console.log(newAnimal);
+                onClose();
+                setTrackedAnimals(prev => [...prev, newAnimal]);    
+            }
         } catch (error) {
-        console.error(error);
+            console.error(error);
         }
     }
+    
 
     return (
         <form onSubmit={handleSubmitForm}>
-            <div className="modal-title">
-                <h1>Add New Animal 🐾</h1>
-                <button type="button" onClick={onClose}> x</button>
-            </div>
+            {
+            mode==="new" && <div className="mode-new">
+                <div className="modal-title">
+                    <h1>Add New Animal 🐾</h1>
+                    <button type="button" onClick={onClose}> x</button>
+                </div>
 
-            <div className="modal-content">
                 <div className="nickname-ctn">
                     <label>
                         NickName*
@@ -76,7 +82,7 @@ const SightingForm = ({onClose}) => {
                             <option value="">Select...</option>
                             <option value="Cat">Cat</option>
                             <option value="Dog">Dog</option>
-                            <option value="Rbbit">Rabbit</option>
+                            <option value="Rabbit">Rabbit</option>
                             <option value="Raccoon">Raccoon</option>
                             <option value="Others">Other</option>
                         </select>
@@ -127,6 +133,23 @@ const SightingForm = ({onClose}) => {
                     </label>
                 </div>
 
+                </div>
+            }
+
+            {/* choose to add sightings to existing animals */}
+            {mode === "existing" &&            
+             <div className="mode-existing">
+                {/* TODOS replace with icons */}
+                <div>
+                    <div> Icon </div>
+                    <div>Selected Animal: <span>{selectedAnimal.nickname}</span></div>
+                </div>
+            </div>}
+
+
+            <div className="modal-content">
+
+                
                 <div className="found-details">
                  
                         <label>
