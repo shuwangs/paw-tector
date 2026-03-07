@@ -29,7 +29,12 @@ const EditAnimalForm = ({onClose, editingAnimal, }) => {
         e.preventDefault();
 
         try {
-            const updatedAnimal = await updateTrackedAnimal(currentUserId, formData.id,formData);
+            const payload = {
+                 ...formData,
+                is_sterilized: formData.is_sterilized ?? false,
+                is_stray: formData.is_stray ?? true
+            }
+            const updatedAnimal = await updateTrackedAnimal(currentUserId, formData.individual_id, payload);
             console.log("updated animal:", updatedAnimal);
             onClose();
         } catch(err) {

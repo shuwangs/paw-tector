@@ -102,7 +102,7 @@ router.get('/:userId/stats', async (req, res)=> {
 router.put('/:userId/tracked-animals/:individualId', async (req, res) => {
     try{
         const userId = Number(req.params.userId);
-        const animalId = Number(req.body.individualId);
+        const animalId = Number(req.params.individualId);
         const animalData = req.body;
         console.log(userId, animalId, animalData)
         const updated = await userService.updateUserTrackedAnimal(userId, animalId,animalData);

@@ -22,6 +22,8 @@ export const updateTrackedAnimal = async (user_id, animal_id, payload )=> {
     const userId = Number(user_id);
     const individualId = Number(animal_id);
     console.log(payload);
+
+    
     const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
         method: "PUT",
         headers: {

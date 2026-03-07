@@ -145,16 +145,36 @@ export const getUserStats = async (user_id) =>{
 
 
 export const updateUserTrackedAnimal = async (user_id, animal_id, animalData) => {
+    const { individual_id, nickname, animal_type, breed_name, color, age_group, is_sterilized, is_stray} = animalData;
     console.log("I am at the update individual area")
-    // const animal_type = animalData.
-    // const {rowCount} = await pool.query(`
-    //     UPDATE individuals
-    //     SET nickname = $1,
-        
+    console.log(animalData)
+    const {rows} = await pool.query(
+      `
+      UPDATE individuals
+      SET 
+        nickname = $1,
+        type_id = (
+          SELECT id 
+          FROM animal_types
+          WHERE name = $2
+        ),
+        breed_name = $3,
+        color = $4,
+        age_group = $5,
+        is_sterilized = $6,
+        is_stray = $7
+      WHERE id = $8
+      RETURNING *
+      `,
+        [nickname, animal_type,
+        breed_name,
+        color,
+        age_group,
+        is_sterilized,
+        is_stray,
+        individual_id]
+    );
     
-
-    //     WHERE user_id = $1 AND individual_id = $2
-    //     `, [user_id, animal_id])
-
-    return null;
+    console.log(rows);
+    return rows[0];
 }
