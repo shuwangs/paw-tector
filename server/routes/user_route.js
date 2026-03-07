@@ -68,20 +68,6 @@ router.post('/:userId/sightings', async (req, res)=> {
         res.status(500).json({ error: err.message });
     }
 })
-router.get('/:userId/stats', async (req, res)=> {
-    const userId = Number(req.params.userId);
-    if (isNaN(userId)) {
-    return res.status(400).json({ error: "Invalid user id" });
-    }
-    try {
-        const result = await userService.getUserStats(userId);
-        // console.log(result);
-        res.status(200).json(result);
-
-    }catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-})
 
 router.get('/:userId/stats', async (req, res)=> {
     const userId = Number(req.params.userId);

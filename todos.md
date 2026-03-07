@@ -21,14 +21,14 @@
 
 3.2 individual  profile
 - [ ] count of how many times each individual has been sighted
-- [ ]first sighting date
+- [ ] first sighting date
 - [ ] most recent sighting date
 
 4. Use Context 
-- [ ] Current User Context
-  - [ ] state: currentUser（{ id: 1, user_name: "Tester1" } ）
-  - [ ] My Records take current user id from context, like  ChooseUserPage：GET /api/users
-  - [ ] click → setCurrentUser
+- [X] Current User Context
+  - [X] state: currentUser（{ id: 1, user_name: "Tester1" } ）
+  - [X] My Records take current user id from context, like  ChooseUserPage：GET /api/users
+  - [X] click → setCurrentUser
 - [X] discovery page context 
 
 5. testing
