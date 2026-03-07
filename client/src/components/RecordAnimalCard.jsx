@@ -5,11 +5,16 @@ import "./DisplayCard.css";
 import EditAnimalForm from "./EditAnimalForm";
 
 const RecordAnimalCard = ({animal}) => {
-    const { currentUserId, deleteTrackedAnimal} = useCurrentUser();
+    const { currentUserId, deleteTrackedAnimal, fetchTrackedAnimals} = useCurrentUser();
     const [editingAnimal, setEditingAnimal] = useState(null);
     const [showEditingForm, setShowEditingForm] = useState(false);
-    const handleDelete = () => {
-        deleteTrackedAnimal( currentUserId, animal.individual_id);
+    const handleDelete = async () => {
+        try {
+            await deleteTrackedAnimal(currentUserId, animal.individual_id);
+            await fetchTrackedAnimals(currentUserId);
+        } catch (err) {
+            console.error("delete animal error:", err);
+        }
     };
     const handleEdit = () =>{
         setShowEditingForm(true);

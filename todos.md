@@ -10,14 +10,14 @@
 - [X] display it with .map():  nickname, animal type, address, health_status / need_help, sighted_at
 
 3. My record page
-- [] fetch users, choose who users.
+- [ ] fetch users, choose who users.
 - [X] fetch /api/users/1/sightings: GET /api/users/1/sightings
 - [X] add sightings flow: if no animal display add new Animal, if animallist is not empty ask new add animal or and sightings for existing animals 
 - [X] add sighting form
 - [X] Post to db /api/users/1/sightings
-- [ ] update UI list
+- [X] update UI list
 - [X] delete animal record
-- [ ] update animal record
+- [X] update animal record
 
 3.2 individual  profile
 - [ ] count of how many times each individual has been sighted
@@ -29,7 +29,7 @@
   - [ ] state: currentUser（{ id: 1, user_name: "Tester1" } ）
   - [ ] My Records take current user id from context, like  ChooseUserPage：GET /api/users
   - [ ] click → setCurrentUser
-- [ ] discovery page context 
+- [X] discovery page context 
 
 5. testing
 - [ ] add testing

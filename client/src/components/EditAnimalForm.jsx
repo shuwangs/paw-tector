@@ -15,7 +15,8 @@ const EditAnimalForm = ({onClose, editingAnimal, }) => {
     handleClearForm,
     handleHealthStatus
     ] = useForm(editingAnimal.animal);
-    const {currentUserId} = useCurrentUser();
+
+    const {currentUserId, fetchTrackedAnimals} = useCurrentUser();
 
     useEffect(() => {
         console.log(editingAnimal);
@@ -25,6 +26,7 @@ const EditAnimalForm = ({onClose, editingAnimal, }) => {
     useEffect(() => {
         setFormData(editingAnimal.animal);
     }, [editingAnimal, setFormData]);
+
     const handleSubmitEditForm =  async (e) => {
         e.preventDefault();
 
@@ -37,6 +39,7 @@ const EditAnimalForm = ({onClose, editingAnimal, }) => {
             const updatedAnimal = await updateTrackedAnimal(currentUserId, formData.individual_id, payload);
             console.log("updated animal:", updatedAnimal);
             onClose();
+            fetchTrackedAnimals(currentUserId);
         } catch(err) {
             console.error("edit animal form submission error:", err);
         }
