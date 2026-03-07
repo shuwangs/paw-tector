@@ -13,7 +13,7 @@ export const getAllSightings = async () => {
 }
 
 export const getSightingsStats = async () => {
-    console.log("testing: reached getSightingsStats in sightings service")
+    // console.log("testing: reached getSightingsStats in sightings service")
     const {rows} = await pool.query(
     `
     SELECT

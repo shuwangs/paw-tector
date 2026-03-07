@@ -35,7 +35,6 @@ export const deleteUserTrackedAnimal = async (user_id, animal_id) => {
 
 
 export const createAnimalWithSighting = async (user_id, form) => {
-    console.log("calling create animal with sightings")
     const  {
         nickname,
         species,
@@ -63,16 +62,13 @@ export const createAnimalWithSighting = async (user_id, form) => {
             FROM animal_types
             WHERE name = $1`, [species]
         );
-        // console.log( typeRes);
 
         if (typeRes.rows.length === 0) {
             throw new Error("Invalid animal type");
         }
 
         const animalId = typeRes.rows[0].id;
-        // console.log( animalId);
 
-        // console.log("animal_id is: ", animalId)
         // 2 insert into individual table
         const individualRes = await client.query(
             `
@@ -83,11 +79,8 @@ export const createAnimalWithSighting = async (user_id, form) => {
             `,
             [nickname, animalId, breed, color, age_group, is_sterilized, is_stray]
         );
-        //  console.log("animal_id is: ", individualRes)
 
-        // Get individual ID 
         const individualId = individualRes.rows[0].id;
-        // console.log("individualId is: ", individualId)
 
         //Insert into sightings
         const sightingsRes = await client.query(
@@ -114,9 +107,6 @@ export const createAnimalWithSighting = async (user_id, form) => {
 
 export const addNewSightingToExistingAnimal = async (user_id, form) => {
     const { individual_id, address, health_status, sighted_at, notes } = form;
-    // console.log("I am at the db chekcing individual id: ", individual_id)
-    // console.log(form);
-    // console.log(user_id);
 
     const { rows } = await pool.query(
         `
@@ -133,14 +123,12 @@ export const addNewSightingToExistingAnimal = async (user_id, form) => {
         `,
     [user_id, individual_id, address, health_status, sighted_at, notes]
   );
-    // console.log("I am at the db chekcing after insert rows: ", rows)
 
   return rows[0];
 
 }
 
 export const getUserStats = async (user_id) =>{
-    console.log("I am at the db chekcing stats id: ", user_id)
 
     const {rows} = await pool.query(
         `SELECT
@@ -151,7 +139,22 @@ export const getUserStats = async (user_id) =>{
         `,
         [user_id]
     )
-    console.log("I am at the db get user stats after insert rows: ", rows)
 
     return rows[0];
+}
+
+
+export const updateUserTrackedAnimal = async (user_id, animal_id, animalData) => {
+    console.log("I am at the update individual area")
+    // const animal_type = animalData.
+    // const {rowCount} = await pool.query(`
+    //     UPDATE individuals
+    //     SET nickname = $1,
+        
+    
+
+    //     WHERE user_id = $1 AND individual_id = $2
+    //     `, [user_id, animal_id])
+
+    return null;
 }

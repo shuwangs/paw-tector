@@ -17,5 +17,26 @@ export const getUserStats = async (userId) =>{
      
 }
 
+export const updateTrackedAnimal = async (user_id, animal_id, payload )=> {
+    console.log("edit animal form submission");
+    const userId = Number(user_id);
+    const individualId = Number(animal_id);
+    console.log(payload);
+    const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify(payload)      
+        })
+
+    if (!response.ok) {
+        throw new Error(`Failed to update animal (${response.status})`);
+    }
+    const updatedAnimal = await response.json();
+    return updatedAnimal;
+
+}
+
   
             

@@ -1,6 +1,7 @@
 import React,{useContext, useState} from "react";
 import { createAnimalWithSighting, addNewSightingToExistingAnimal } from "../api/sightingsApi";
 import { useCurrentUser } from "../context/CurrentUserContext";
+import useForm from '../utils/useForm.js';
 import './SightingForm.css'
 const SightingForm = ({onClose, mode, selectedAnimal}) => {
     // TODOS
@@ -24,32 +25,15 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
     }
 
 
-    const [form, setForm] = useState(initialForm);
+    const [formData, setFormData, handleChange, handleCheckboxChange, resetForm, handleClearForm, handleHealthStatus] = useForm(initialForm);
 
     console.log(mode);
-    const handleChange = ((event) => {
-        setForm((prev)=>({ ...prev, [event.target.name]: event.target.value}));
-    })
-
-    const handleHealthStatus = (status) => {
-        setForm((prev)=>({...prev, health_status: status}));
-    }
-    
-    const handleClearForm = () => setForm(initialForm);
-    const handleCheckboxChange = (e) => {
-        const { name, checked } = e.target;
-
-        setForm((prev) => ({
-            ...prev,
-            [name]: checked
-        }));
-    };
 
     const handleSubmitForm = async (e) => {  
         e.preventDefault();
         try {
             if (mode == "new") {
-                const newAnimal = await createAnimalWithSighting(currentUserId, form);
+                const newAnimal = await createAnimalWithSighting(currentUserId, formData);
                 console.log(newAnimal);
                 onClose();
                 setTrackedAnimals(prev => [...prev, newAnimal]);    
@@ -58,10 +42,10 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 const payload = {
                     // user_id: currentUserId,
                     individual_id: selectedAnimal.individual_id,
-                    address: form.location,
-                    health_status: form.health_status,
-                    sighted_at: form.sighted_at,
-                    notes: form.notes,
+                    address: formData.location,
+                    health_status: formData.health_status,
+                    sighted_at: formData.sighted_at,
+                    notes: formData.notes,
                 };
                 const newSighting = await addNewSightingToExistingAnimal(currentUserId, payload);
                 console.log(newSighting);
@@ -87,14 +71,14 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 <div className="nickname-ctn">
                     <label>
                         NickName*
-                        <input type="text" name="nickname" value={form.nickname} onChange={handleChange}/>
+                        <input type="text" name="nickname" value={formData.nickname} onChange={handleChange}/>
                     </label>
                 </div>
 
                 <div className="breed-ctn">
                     <label>
                         Species*
-                        <select name="species" value={form.species}  onChange={handleChange}>
+                        <select name="species" value={formData.species}  onChange={handleChange}>
                             <option value="">Select...</option>
                             <option value="Cat">Cat</option>
                             <option value="Dog">Dog</option>
@@ -105,14 +89,14 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                     </label>
                     <label >
                         Breed
-                        <input name="breed" value={form.breed} onChange={handleChange} type="text" placeholder="Optional"  />
+                        <input name="breed" value={formData.breed} onChange={handleChange} type="text" placeholder="Optional"  />
                     </label>
                 </div>
 
                 <div className="color-ctn">
                     <label>
                         Age*
-                        <select name="age_group" value={form.age_group}  onChange={handleChange}>
+                        <select name="age_group" value={formData.age_group}  onChange={handleChange}>
                             <option value="unknown">Unknown</option>
                             <option value="baby">Babe</option>
                             <option value="young">Young</option>
@@ -122,7 +106,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                     </label>
                     <label >
                         Color
-                        <input value={form.color} onChange={handleChange} name="color" type="text" placeholder="Optional"  />
+                        <input value={formData.color} onChange={handleChange} name="color" type="text" placeholder="Optional"  />
                     </label>
                 </div>
 
@@ -133,7 +117,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                         <input
                             type="checkbox"
                             name="is_sterilized"
-                            checked={form.is_sterilized}
+                            checked={formData.is_sterilized}
                             onChange={handleCheckboxChange}
                         />
                     </label>
@@ -143,7 +127,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                         <input
                             type="checkbox"
                             name="is_stray"
-                            checked={form.is_stray}
+                            checked={formData.is_stray}
                             onChange={handleCheckboxChange}
                         />
                     </label>
@@ -170,12 +154,12 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                  
                         <label>
                             Location*
-                            <input type="text" name="location" value={form.location} onChange={handleChange} />
+                            <input type="text" name="location" value={formData.location} onChange={handleChange} />
                         </label>
        
                         <label>
                             Sighted at*
-                            <input name="sighted_at" type="datetime-local" value={form.sighted_at} onChange={handleChange} />
+                            <input name="sighted_at" type="datetime-local" value={formData.sighted_at} onChange={handleChange} />
                         </label>
        
                 </div>
@@ -191,7 +175,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 <div>
                     <textarea
                         name="notes" 
-                        value={form.notes}
+                        value={formData.notes}
                         onChange={handleChange}
                         placeholder="Notes: anything about this animal (Optional)"
                     />

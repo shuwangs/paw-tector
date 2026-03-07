@@ -7,7 +7,6 @@ export const CurrentUserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(1);
     const [trackedAnimals, setTrackedAnimals] = useState([]);
-    const [animalOnEditing, setAnimalOnEditing ] = useState(null);
     const [currentUserStats, setCurrentUserStats] = useState({
         animals_tracked: 0,
         total_sightings:0,
@@ -118,8 +117,6 @@ export const CurrentUserProvider = ({children}) => {
         currentUserStats,
         setCurrentUserId,
         trackedAnimals,
-        animalOnEditing,
-        setAnimalOnEditing,
         setTrackedAnimals,
         loading,
         error,

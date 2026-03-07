@@ -20,7 +20,6 @@ router.get('/stats', async (req, res) => {
     // res.send("Hello from Router");
     try {
         const stats = await sightingsService.getSightingsStats();
-        console.log(stats);
         res.json(stats);
     } catch(err) {
         res.status(500).json({error: err.message})
