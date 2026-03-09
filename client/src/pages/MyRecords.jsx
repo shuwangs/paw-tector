@@ -3,12 +3,13 @@ import { useRoutes } from "react-router-dom";
 import { useCurrentUser } from "../context/CurrentUserContext.jsx";
 import RecordAnimalsList from "../components/RecordAnimalsList.jsx";
 import '../App.css';
+import './MyRecords.css';
 
 const MyRecords = () => {
     const {users, currentUserId, setCurrentUserId, currentUserStats, loading, error} = useCurrentUser();
 
     return (
-        <div>
+        <div className="my-record-page">
             <div>This is the user records page</div>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
@@ -30,18 +31,18 @@ const MyRecords = () => {
                 </div>
 
                 <div className="my-stats">
-                    <div className="stats-ctn">
+                    <div className="record-stat-card">
                         <p>{currentUserStats.total_sightings}</p>
                         <p>Total Sightings</p>
 
                     </div>
 
-                    <div className="stats-ctn">
+                    <div className="record-stat-card">
                         <p>{currentUserStats.animals_tracked}</p>
                         <p>Total Animals</p>
                     </div>
 
-                    <div className="stats-ctn">
+                    <div className="record-stat-card">
                         <p>{currentUserStats.locations} </p>
                         <p>Locations</p>
                     </div>

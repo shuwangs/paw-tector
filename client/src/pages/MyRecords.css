@@ -1,0 +1,53 @@
+.my-record-page {
+    color: var(--text-color);
+}
+
+.current-user-stats {
+  margin: 2rem 1rem;
+  background-color: white;
+  border-radius: 30px;
+  padding:2rem 2rem;
+  transition: transform 0.2s ease;
+
+}
+
+.current-user-stats:hover {
+    transform: translateY(-2px);
+}
+
+.my-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+}
+
+.record-stat-card {
+  background: white;
+  padding: 0 2rem;
+  border-radius: 16px;
+  min-width: 200px;
+}
+
+.record-stat-card:first-child{
+    background-color: var(  --bg-secondary);
+}
+.record-stat-card:first-child p:first-child {
+    color:var( --primary_accent_color); 
+    font-size: 2rem;
+}
+.record-stat-card:nth-child(2){
+    background-color: #fffae5;
+}
+.record-stat-card:nth-child(2)  p:first-child {
+    color: #ffc600; 
+    font-size: 2rem;
+}
+
+.record-stat-card:nth-child(3) {
+    background-color: #caf0f8;
+}
+.record-stat-card:nth-child(3)  p:first-child {
+    color: #0077b6; 
+    font-size: 2rem;
+}
