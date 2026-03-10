@@ -4,7 +4,6 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 const AnimalProfilePage = () => {
-
     return(
         <div className="animal-profile-page">
             <Link to="/records" className="back-link"><IoMdArrowRoundBack /> back</Link>

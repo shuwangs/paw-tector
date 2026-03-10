@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { useCurrentUser } from "../context/CurrentUserContext";
 
 import "./DisplayCard.css";
@@ -23,10 +23,10 @@ const RecordAnimalCard = ({animal}) => {
         setShowEditingForm(true);
         setEditingAnimal({animal});
     }
-    const handleView = () => {
-        navigate(`/individuals/${animal.individual_id}`);
+    // const handleView = () => {
+    //     navigate(`/individuals/${animal.individual_id}`);
 
-    }
+    // }
 
     return (
         <>
@@ -40,8 +40,10 @@ const RecordAnimalCard = ({animal}) => {
                 </div>
 
                 <div className='btn-ctn'>
-                   
-                    <button onClick={handleView}>👁️</button>
+                    <Link to ={`/individuals/${animal.individual_id}`} className="view-animal-link">
+
+                        <button>👁️</button>
+                    </Link>
                     <button onClick={handleEdit}>✏️</button>
                     <button onClick={handleDelete}>🗑️</button>
                 </div>
