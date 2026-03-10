@@ -8,9 +8,10 @@ const router = Router();
 // Get api/sightings
 
 router.get('/', async (req, res) => {
-    // res.send("Hello from Router");
     try {
-        const sightings = await sightingsService.getAllSightings();
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+        const sightings = await sightingsService.getAllSightings(page, limit);
         res.json(sightings);
     } catch(err) {
         res.status(500).json({error: err.message})

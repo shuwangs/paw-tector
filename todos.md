@@ -10,7 +10,7 @@
 - [X] display it with .map():  nickname, animal type, address, health_status / need_help, sighted_at
 
 3. My record page
-- [ ] fetch users, choose who users.
+- [X] fetch users, choose who users.
 - [X] fetch /api/users/1/sightings: GET /api/users/1/sightings
 - [X] add sightings flow: if no animal display add new Animal, if animallist is not empty ask new add animal or and sightings for existing animals 
 - [X] add sighting form
@@ -47,7 +47,8 @@
 
 6. optional
 - [ ] Let users search for sightings within a certain date range
-- [ ] paging
+- [X] paging
+  - [ ] let user select display limits
 - [ ] discovery map view
 - [X] Home page stats  GET /api/stats
 - [X] My record page count of my sightings

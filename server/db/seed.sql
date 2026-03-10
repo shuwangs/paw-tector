@@ -41,6 +41,20 @@ VALUES
 ('Bandit', 4, NULL, 'Gray', 'Often seen near dumpsters behind restaurants at night.', 'adult', false, true),
 ('Rocket', 4, NULL, 'Gray/Black', 'Fast raccoon spotted near residential trash bins.', 'young', false, true);
 
+-- More individuals
+INSERT INTO individuals (nickname, type_id, breed_name, color, description, age_group, is_sterilized, is_stray)
+VALUES
+('Milo', 1, 'Tabby', 'Brown', 'Curious cat often seen near cafes.', 'adult', true, true),
+('Luna', 1, NULL, 'Gray', 'Quiet gray cat resting near apartments.', 'young', false, true),
+('Charlie', 2, 'Labrador', 'Black', 'Friendly dog wandering near parks.', 'adult', false, true),
+('Max', 2, NULL, 'Brown', 'Energetic dog spotted running near playground.', 'young', false, true),
+('Clover', 3, NULL, 'White/Brown', 'Small rabbit hiding near bushes.', 'young', false, true),
+('Sky', 5, NULL, 'Blue/Gray', 'Bird frequently seen on power lines.', 'adult', false, true),
+('Pebble', 4, NULL, 'Gray', 'Raccoon digging through trash bins.', 'adult', false, true),
+('Flash', 4, NULL, 'Dark Gray', 'Quick raccoon running across alleys.', 'young', false, true);
+
+
+
 INSERT INTO sightings (
   individual_id,
   user_id,
@@ -74,5 +88,64 @@ VALUES
 
 -- Rocket sightings
 (6, 1, 'Residential street trash bins', '20004', 'DC', 38.8951, -77.0364, 'unknown', false, 'Very fast; only briefly observed.', NULL);
+
+
+INSERT INTO sightings (
+  individual_id,
+  user_id,
+  address,
+  zipcode,
+  state,
+  latitude,
+  longitude,
+  health_status,
+  need_help,
+  note,
+  image_url
+)
+VALUES
+(7,1,'Near Georgetown Waterfront','20007','DC',38.9047,-77.0669,'healthy',false,'Resting near benches.',NULL),
+(7,2,'Behind coffee shop','20007','DC',38.9055,-77.0639,'unknown',false,'Seen looking for food.',NULL),
+
+(8,1,'Apartment parking lot','20009','DC',38.9190,-77.0365,'healthy',false,'Quiet gray cat sleeping.',NULL),
+(8,3,'Near bike racks','20009','DC',38.9180,-77.0350,'unknown',false,'Quickly ran away.',NULL),
+
+(9,2,'Park walking trail','20010','DC',38.9325,-77.0310,'healthy',false,'Friendly but cautious.',NULL),
+(9,1,'Near playground','20010','DC',38.9318,-77.0300,'healthy',false,'Dog sniffing around trash can.',NULL),
+
+(10,3,'Basketball court','20011','DC',38.9572,-77.0240,'healthy',false,'Running around kids playing.',NULL),
+(10,2,'Near community garden','20011','DC',38.9560,-77.0230,'unknown',false,'Looked energetic.',NULL),
+
+(11,1,'Near bushes by library','20002','DC',38.9072,-76.9900,'healthy',false,'Small rabbit hopping.',NULL),
+(11,2,'Behind apartment complex','20002','DC',38.9065,-76.9910,'unknown',false,'Hiding in grass.',NULL),
+
+(12,1,'Power lines near school','20003','DC',38.8835,-76.9980,'healthy',false,'Bird perched quietly.',NULL),
+(12,3,'Tree near sidewalk','20003','DC',38.8840,-76.9970,'healthy',false,'Flying between trees.',NULL),
+
+(13,2,'Dumpster near restaurant','20004','DC',38.8955,-77.0350,'healthy',false,'Looking for leftovers.',NULL),
+(13,1,'Alley trash bins','20004','DC',38.8948,-77.0340,'unknown',false,'Raccoon digging through trash.',NULL),
+
+(14,3,'Backyard fence','20005','DC',38.9032,-77.0380,'healthy',false,'Quick raccoon sighting.',NULL),
+(14,1,'Street trash cans','20005','DC',38.9028,-77.0370,'unknown',false,'Ran away quickly.',NULL),
+
+(1,2,'Near grocery parking lot','20007','DC',38.9050,-77.0625,'healthy',false,'Orange cat wandering.',NULL),
+(1,3,'Apartment entrance','20007','DC',38.9060,-77.0630,'healthy',false,'Eating leftovers.',NULL),
+
+(2,1,'Behind convenience store','20002','DC',38.9065,-76.9940,'injured',true,'Still limping slightly.',NULL),
+(2,2,'Parking garage entrance','20002','DC',38.9070,-76.9935,'injured',true,'Stayed under car.',NULL),
+
+(3,3,'Park entrance path','20008','DC',38.9385,-77.0510,'healthy',false,'Friendly dog sniffing ground.',NULL),
+(3,2,'Near jogging trail','20008','DC',38.9390,-77.0500,'healthy',false,'Walking calmly.',NULL),
+
+(4,1,'Metro bus stop','20005','DC',38.9040,-77.0385,'sick',true,'Dog looked tired.',NULL),
+(4,3,'Street corner','20005','DC',38.9045,-77.0395,'sick',true,'Panting heavily.',NULL),
+
+(5,2,'Restaurant back alley','20003','DC',38.8815,-76.9960,'healthy',false,'Searching for scraps.',NULL),
+(5,1,'Trash area behind shops','20003','DC',38.8820,-76.9955,'healthy',false,'Quick raccoon sighting.',NULL),
+
+(6,3,'Near office building bins','20004','DC',38.8958,-77.0360,'unknown',false,'Only seen briefly.',NULL),
+(6,2,'Side street trash cans','20004','DC',38.8960,-77.0355,'unknown',false,'Fast movement.',NULL);
+
+
 
 COMMIT;
