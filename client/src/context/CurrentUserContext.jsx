@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUsers, getUserStats } from "../api/userApi.js";
+import { getUsers, getUserStats, fetchTrackedAnimals} from "../api/userApi.js";
 
 const CurrentUserContext = createContext();
 
@@ -17,19 +17,16 @@ export const CurrentUserProvider = ({children}) => {
     const [loading, setLoading] = useState(false);
     
 
-    const fetchTrackedAnimals = async (userId) => {
+    const getTrackedAnimals = async (userId) => {
         if(!userId) return;
         setLoading(true);
         setError(null);
 
+        
         try {
-            const response = await fetch(`/api/users/${userId}/tracked-animals`);
-            if(!response.ok) {
-                throw new Error(`Fetch tracked animals failed (${response.status})`);
-            }
-            const data = await response.json();
-            console.log("tracked animals are : ", data);
-            setTrackedAnimals(data);
+            const result = await fetchTrackedAnimals(userId);
+            console.log("tracked animals are : ", result);
+            setTrackedAnimals(result);
         } catch(err) {
             setError(err.message || "Unknown error");
 
@@ -76,7 +73,8 @@ export const CurrentUserProvider = ({children}) => {
     },[])
 
     useEffect(() => {
-        fetchTrackedAnimals(currentUserId);
+        getTrackedAnimals(currentUserId);
+        fetchCurrentUserStats(currentUserId);
     }, [currentUserId]);
 
     const deleteTrackedAnimal = async (user_id, animal_id) => {
@@ -125,13 +123,10 @@ export const CurrentUserProvider = ({children}) => {
     }
     
 
-
-
     return (
     <CurrentUserContext.Provider value={ value }>
         {children}
     </CurrentUserContext.Provider>)
-
 
 }
 

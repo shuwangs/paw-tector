@@ -40,5 +40,15 @@ export const updateTrackedAnimal = async (user_id, animal_id, payload )=> {
 
 }
 
+export const fetchTrackedAnimals = async (userId) => {
+    const response = await fetch(`/api/users/${userId}/tracked-animals`);
+    if(!response.ok) {
+        throw new Error(`Fetch tracked animals failed (${response.status})`);
+    }
+    const data = await response.json();
+
+    return data
+}
+
   
             
