@@ -5,7 +5,7 @@ const CurrentUserContext = createContext();
 
 export const CurrentUserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
-    const [currentUserId, setCurrentUserId] = useState(1);
+    const [currentUserId, setCurrentUserId] = useState(null);
     const [trackedAnimals, setTrackedAnimals] = useState([]);
     const [currentUserStats, setCurrentUserStats] = useState({
         animals_tracked: 0,

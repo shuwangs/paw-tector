@@ -10,14 +10,16 @@ const MyRecords = () => {
 
     return (
         <div className="my-record-page">
-            <div>This is the user records page</div>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
 
             <div className='total-user'>
-                <option>User List</option>
+                <label>Volunteer List</label>
+
                 <select value={currentUserId || ""}
                     onChange={(e) => setCurrentUserId(e.target.value)}>
+                    <option value={currentUserId || ""}>Volunteers</option>
+                    
                     {users.map((u) => (
                         <option key={u.id} value={u.id}>{u.user_name}</option>
                     ))}
