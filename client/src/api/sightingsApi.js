@@ -1,11 +1,12 @@
-export const getSightings = async () => {
-  const response = await fetch("/api/sightings");
+export const getSightings = async (page) => {
+  const response = await fetch(`/api/sightings?page=${page}&limit=10`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch sightings");
   }
-
-  return response.json();
+  const data = response.json();
+  console.log(data);
+  return data;
 };
 
 export const createAnimalWithSighting = async (user_id, form) => {

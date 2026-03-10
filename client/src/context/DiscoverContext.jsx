@@ -1,9 +1,12 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
-import {getSightingsStats} from '../api/sightingsApi.js'
+import {getSightingsStats, getSightings} from '../api/sightingsApi.js'
+
 const DiscoverContext = createContext(null);
 
 export const DiscoverProvider = ({children}) => {
     const [sightings, setSightings] = useState([]);
+    const [page, setPage]= useState(1);
+    const [totalPage, setTotalPage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null); 
     const [stats, setStats ] = useState( 
@@ -16,15 +19,16 @@ export const DiscoverProvider = ({children}) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch("/api/sightings");
-
-            if (!response.ok) {
-            throw new Error("fetch sightings error");
-            }
-
-            const data = await response.json();
-            console.log(data);
-            setSightings(data);
+            const result = await getSightings(page);
+            console.log(result);
+            setSightings(result.data);
+            setTotalPage(() => {
+                if (result.totalCount%result.limit === 0) {
+                    setTotalPage (result.totalCount/result.limit)
+                } else {
+                    setTotalPage (Math.floor(result.totalCount/result.limit) + 1) 
+                }
+            })
         } catch (err) {
             setError(err.message || "Unknown error");
         } finally {
@@ -50,11 +54,19 @@ export const DiscoverProvider = ({children}) => {
     useEffect(() => {
         fetchSightings();
         fetchSightingsStats();
-    }, []);
+    }, [page]);
 
+    useEffect(() => {
+        fetchSightingsStats();
+    }, []);
+    
     const value = {
         sightings,
         stats,
+        page, 
+        setPage,
+        totalPage,
+        setTotalPage,
         setSightings,
         loading,
         error,
@@ -62,8 +74,6 @@ export const DiscoverProvider = ({children}) => {
     };
 
     return <DiscoverContext.Provider value={value}>{children}</DiscoverContext.Provider>;
-
-
 
 
 }
