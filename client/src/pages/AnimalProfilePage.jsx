@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {Link, useParams} from 'react-router-dom';
 import {getAnimalHistory} from '../api/animalApi.js';
 import { IoMdArrowRoundBack } from "react-icons/io";
-
+import './AnimalProfilePage.css'
 
 const AnimalProfilePage = () => {
     const [history, setHistory] = useState(null);
@@ -31,7 +31,7 @@ const AnimalProfilePage = () => {
 
     }, [animalId])
 
-      if (loading) {
+    if (loading) {
         return <p>Loading animal profile...</p>;
     }
 

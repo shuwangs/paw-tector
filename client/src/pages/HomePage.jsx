@@ -1,5 +1,6 @@
 
 import React, {useContext} from "react";
+import {Link} from 'react-router-dom';
 import { useDiscover  } from "../context/DiscoverContext";
 import './HomePage.css'
 const HomePage = () => {
@@ -14,8 +15,13 @@ const HomePage = () => {
                     <p>Join our community of volunteers to track and care for stray animals in your neighborhood</p>
                 </div>
                 <div className="btn-group">
-                    <button className="btn-join">💚 Join Our Community</button>
-                    <button className="btn-report">🔍 Report Sighting</button>
+                    <Link to="/discover"  className="toLinkDiscover" >
+                        <button className="btn-join">💚 Explore Sightings</button>
+                    </Link>
+                    <Link to='/records' >
+                        <button className="btn-report">🔍 Report Sighting</button>
+                    </Link>
+                    
                 </div>
             </div>
 

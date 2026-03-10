@@ -51,3 +51,12 @@
     color: #0077b6; 
     font-size: 2rem;
 }
+
+
+/* Record Animal List */
+
+.myrecord-header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
