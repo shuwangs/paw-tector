@@ -8,6 +8,8 @@ const AnimalProfilePage = () => {
         <div className="animal-profile-page">
             <Link to="/records" className="back-link"><IoMdArrowRoundBack /> back</Link>
             <h1>This animal Profile Page!</h1>
+
+            
         </div>
     )
 }
