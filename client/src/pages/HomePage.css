@@ -57,7 +57,7 @@
 .description-cards {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    justify-content: space-evenly; 
 }
 .discription-card {
     align-items: center;
@@ -68,14 +68,25 @@
     background-color: white;
     color: var(--text-color);
     border-radius: 30px;
+    padding: 0 5px;
 }
 
 .discription-card h2 {
-    font-size: 3rem;
+    font-size: 2rem;
     background-color: var(--bg-secondary);
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+}
+
+
+@media (max-width: 768px) {
+   .stats-ctn {
+    flex-direction: column;
+  }
+  .description-cards{
+    flex-direction: column;
+  }
 }

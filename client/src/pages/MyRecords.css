@@ -60,3 +60,15 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .my-stats {
+    flex-direction: column;
+  }
+}
