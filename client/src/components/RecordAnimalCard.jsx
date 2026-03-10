@@ -6,8 +6,6 @@ import "./DisplayCard.css";
 import EditAnimalForm from "./EditAnimalForm";
 
 const RecordAnimalCard = ({animal}) => {
-    const navigate = useNavigate();
-
     const { currentUserId, deleteTrackedAnimal, fetchTrackedAnimals} = useCurrentUser();
     const [editingAnimal, setEditingAnimal] = useState(null);
     const [showEditingForm, setShowEditingForm] = useState(false);
