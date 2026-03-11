@@ -92,9 +92,10 @@ export const CurrentUserProvider = ({children}) => {
             if (!response.ok) {
                 throw new Error(`Delete tracked animal failed (${response.status})`);
             }
-            setTrackedAnimals(prev => {
-                return prev.filter((animal) => animal.invidual_id != individualId);
-            })
+            // setTrackedAnimals(prev => {
+            //     return prev.filter((animal) => animal.invidual_id != individualId);
+            // })
+            await getTrackedAnimals(user_id);
 
         } catch(err) {
             setError(err.message || "Unknown error");
