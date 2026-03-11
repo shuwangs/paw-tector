@@ -19,7 +19,7 @@ const SightingCard = ({sighting}) => {
                  {/* TODO add with animalName */}
                 <div className="species">AnimalType • {sighting.breed_name}</div>
                 <div className="location"><span className="location-icon">📍</span> {sighting.address}</div>
-                <div className="sighting-time">{sighting.sighted_at}</div>
+                <div className="sighting-time">{new Date(sighting.sighted_at).toLocaleString()}</div>
             </div>
 
         </div>

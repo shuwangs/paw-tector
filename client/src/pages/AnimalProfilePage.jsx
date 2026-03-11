@@ -67,17 +67,18 @@ const AnimalProfilePage = () => {
     const animal = history.animalInfo[0];
     return(
         <div className="animal-profile-page">
-            <Link to="/records" className="back-link"><IoMdArrowRoundBack /> back</Link>
-            <div className="profile-header">
-                <div className="profile-name">
+            <Link to="/records" className="back-link"><IoMdArrowRoundBack /> Back</Link>
+            <div className="profile-card">
+                <div className="name-row">
                     <div className="animal-name"> {animal.nickname}</div>
-                    <div className="animal-color">{animal.color}</div>
+                    <div className="animal-color">Color: {animal.color}</div>
                 </div>
 
                 <div className="profile-breed">
                     <div className="animal-info"> {animal.breed_name ?? ""}</div>
                     <div className="animal-info">{capitalize(animal.age_group) ?? "Unknown"}</div>
                 </div>
+
                 <div className="profile-stats-grid">
                         <div className="stat-card">
                         <p className="stat-label">Last Seen</p>
@@ -89,30 +90,44 @@ const AnimalProfilePage = () => {
                     <p className="stat-value">👀 {animalStats.sightings_count} time{animalStats.sightings_count > 1 ? "s" : ""}</p>
                     </div>
                 </div>
-                <div className="profile-stats">
+                <div className="profile-description">
                     <div className="animal-seen">Description: {animal.description}</div>
                 </div>
             </div>
 
-            <div className="history">
-                <h2>📅 Sighting Timeline</h2>
-                <div className="history-ctn">
-                    {history.sightedHistory.map((rec)=> {
-                        return (
-                            <div className="record">
-                                <div className="rec-status">
-                                    <div> {new Date(rec.sighted_at).toLocaleString()} </div>
-                                    <div> {rec.health_status} </div>
-                                </div>
-                                <div className="sighted-location">
-                                    <div> {rec.address} </div> 
-                                    <div> {rec.state} </div> 
-                                    <div>{rec.zipcode}</div>
-                                </div>
+            <div className="timeline-section">
+                <h2 className="timeline-title">📅 Sighting Timeline</h2>
+
+                <div className="timeline-list">
+                    {history.sightedHistory.map((rec, index) => (
+                    <div
+                        className="timeline-item"
+                        key={rec.sighting_id || rec.id || index}
+                    >
+                        <div className="timeline-number">
+                        {history.sightedHistory.length - index}
+                        </div>
+
+                        <div className="timeline-card">
+                        <div className="timeline-left">
+                            <div className="timeline-date">
+                            {new Date(rec.sighted_at).toLocaleString()}
                             </div>
 
-                        )
-                    })}
+                            <div className="timeline-location">
+                            📍 {rec.address || "Unknown Area"}
+                            </div>
+                        </div>
+
+                        <div className={`timeline-status ${rec.health_status}`}>
+                            {rec.health_status === "healthy" && "💚"}
+                            {rec.health_status === "injured" && "🤕"}
+                            {rec.health_status === "sick" && "😷"}
+                            {rec.health_status === "unknown" && "❔"}
+                        </div>
+                        </div>
+                    </div>
+                    ))}
                 </div>
             </div>
         </div>
