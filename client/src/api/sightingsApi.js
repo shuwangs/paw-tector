@@ -1,5 +1,5 @@
 export const getSightings = async (page) => {
-  const response = await fetch(`/api/sightings?page=${page}&limit=10`);
+  const response = await fetch(`/api/sightings?page=${page}&limit=12`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch sightings");

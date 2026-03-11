@@ -1,6 +1,6 @@
 import pool from '../db/db.js';
 
-export const getAllSightings = async (page = 1, limit = 10) => {
+export const getAllSightings = async (page = 1, limit = 12) => {
     const offset = (page - 1) * limit;
     const { rows } = await pool.query( `
         SELECT s.id, s.user_id, s.address, s.zipcode, s.state, s.latitude, s.longitude, s.health_status,

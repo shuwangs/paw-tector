@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import SightingCard from './SightingCard.jsx';
 import { useDiscover } from "../context/DiscoverContext";
 import {FcPrevious, FcNext } from "react-icons/fc";
+import './DisplayCard.css';
 
 const SightingsList = () => {
     const {page, setPage, totalPage, sightings, loading, error } = useDiscover();

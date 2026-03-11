@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {Link} from 'react-router-dom';
 import { useCurrentUser } from "../context/CurrentUserContext";
-
-import "./DisplayCard.css";
 import EditAnimalForm from "./EditAnimalForm";
+import {getAnimalEmoji} from '../utils/helper.js';
+import "./DisplayCard.css";
 
 const RecordAnimalCard = ({animal}) => {
     const { currentUserId, deleteTrackedAnimal, fetchTrackedAnimals} = useCurrentUser();
@@ -29,13 +29,20 @@ const RecordAnimalCard = ({animal}) => {
     return (
         <>
             <div className="animal-card">
-                <div className="animal-icon">Cat</div>
-                <div className="animal-details">
-                    <div className="name-ctn">{animal.nickname}</div>
-                    <div className="status-ctn">{animal.health_status}</div>
-                    <div className="species">{animal.animal_type} • {animal.breed_name}</div>
-                    <div className="location"><span className="location-icon">📍</span> {animal.address}</div>
+                <div className="animal-card-left">
+                    <div className="animal-icon">{getAnimalEmoji(animal.animal_type.toLowerCase())}</div>
+                    <div className="animal-details">
+                        <div className="name-ctn">
+                            <div className="name-area">{animal.nickname}</div>
+                            <div className={`status-ctn ${animal.health_status}`} >{animal.health_status}</div>
+                        </div>
+                        
+                        <div className="species">{animal.animal_type} • {animal.breed_name}</div>
+                        <div className="location"><span className="location-icon">📍</span> {animal.address}</div>
+                    </div>
                 </div>
+       
+
 
                 <div className='btn-ctn'>
                     <Link to ={`/individuals/${animal.individual_id}`} className="view-animal-link">
