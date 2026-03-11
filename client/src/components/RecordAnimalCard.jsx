@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Link} from 'react-router-dom';
 import { useCurrentUser } from "../context/CurrentUserContext";
 import EditAnimalForm from "./EditAnimalForm";
-import {getAnimalEmoji} from '../utils/helper.js';
+import {getAnimalEmoji, capitalize} from '../utils/helper.js';
 import "./DisplayCard.css";
 
 const RecordAnimalCard = ({animal}) => {
@@ -36,21 +36,23 @@ const RecordAnimalCard = ({animal}) => {
                             <div className="name-area">{animal.nickname}</div>
                             <div className={`status-ctn ${animal.health_status}`} >{animal.health_status}</div>
                         </div>
-                        
-                        <div className="species">{animal.animal_type} • {animal.breed_name}</div>
-                        <div className="location"><span className="location-icon">📍</span> {animal.address}</div>
+                        <div className="type-ctn">
+                            <div className="species">{animal.animal_type}  {animal.breed_name ? ` • ${animal.breed_name}` : ""}</div>
+                            <div className="location"><span className="age-icon">Age: </span> {capitalize(animal.age_group)}</div>
+                        </div>
+      
                     </div>
                 </div>
        
 
 
-                <div className='btn-ctn'>
+                <div className='record-btn-groups'>
                     <Link to ={`/individuals/${animal.individual_id}`} className="view-animal-link">
 
-                        <button>👁️</button>
+                        <button className="record-btn">👀</button>
                     </Link>
-                    <button onClick={handleEdit}>✏️</button>
-                    <button onClick={handleDelete}>🗑️</button>
+                    <button className="record-btn" onClick={handleEdit}>✏️</button>
+                    <button className="record-btn" onClick={handleDelete}>🗑️</button>
                 </div>
 
             </div>
