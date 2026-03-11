@@ -145,8 +145,8 @@ export const getUserStats = async (user_id) =>{
 
 export const updateUserTrackedAnimal = async (user_id, animal_id, animalData) => {
     const { individual_id, nickname, animal_type, breed_name, color, age_group, is_sterilized, is_stray} = animalData;
-    console.log("I am at the update individual area")
-    console.log(animalData)
+    // console.log("I am at the update individual area")
+    // console.log(animalData)
     const {rows} = await pool.query(
       `
       UPDATE individuals
@@ -174,6 +174,5 @@ export const updateUserTrackedAnimal = async (user_id, animal_id, animalData) =>
         individual_id]
     );
     
-    console.log(rows);
     return rows[0];
 }

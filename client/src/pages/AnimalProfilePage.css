@@ -1,0 +1,39 @@
+.animal-profile-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg-primary);
+  color: var(--text-color);
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-weight: 900;
+  justify-content: left;
+}
+.back-link:hover {
+  transform: translateX(-2px);
+  opacity: 0.8;
+}
+.profile-header {
+  background: white;
+  border-radius: 28px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.profile-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.animal-name {
+    font-size: 1.5rem;
+    color:var( --text-color);
+}

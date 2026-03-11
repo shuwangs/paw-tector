@@ -29,16 +29,16 @@ export const fetchAnimalData = async(individualId) =>{
 
 export const getAnimalStats = async(individualId) =>{
     
-    const {rows} = pool.query(
+    const {rows} = await pool.query(
         `SELECT
-        (SELECT COUNT(*) AS sightings_count),
-        (SELECT MIN(sighted_at) AS first_sighting,
-        (SLECT MAX(sighted_at) AS last_sighting)
+        COUNT(*) AS sightings_count,
+        MIN(sighted_at) AS first_sighting,
+        MAX(sighted_at) AS last_sighting
         FROM sightings
         WHERE individual_id = $1
         `, [individualId]
     );
 
-    console.log("individual animal stats: ", rows);
-    return rows
+    console.log("individual animal stats: ", rows[0]);
+    return rows[0];
 }

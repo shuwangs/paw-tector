@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import sightingsRouter from './routes/sightings_route.js'
 import userRouter from './routes/user_route.js';
-import animalRouter from './routes/aninal_route.js';
+import animalRouter from './routes/animal_route.js';
 const app = express();
 
 app.use(cors());
