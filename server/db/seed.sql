@@ -21,7 +21,7 @@ VALUES
 ('Rabbit'),
 ('Raccoon'),
 ('Bird'),
-('Others');
+('Other');
 
 
 -- individuals 

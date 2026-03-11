@@ -49,7 +49,7 @@ export const createAnimalWithSighting = async (user_id, form) => {
         sighted_at,
         notes
     } = form;
-    // console.log( nickname);
+
     const client = await pool.connect();
     
     try{
@@ -81,7 +81,6 @@ export const createAnimalWithSighting = async (user_id, form) => {
         );
 
         const individualId = individualRes.rows[0].id;
-
         //Insert into sightings
         const sightingsRes = await client.query(
             `

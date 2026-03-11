@@ -159,7 +159,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
        
                         <label>
                             Sighted at*
-                            <input name="sighted_at" type="datetime-local" value={formData.sighted_at} onChange={handleChange} />
+                            <input required name="sighted_at" type="datetime-local" value={formData.sighted_at} onChange={handleChange} />
                         </label>
        
                 </div>

@@ -44,11 +44,11 @@ router.delete('/:userId/tracked-animals/:individualId', async (req, res) => {
 
 router.post('/:userId/tracked-animals', async (req, res) => {
     const userId = Number(req.params.userId);
-        // console.log(userId);
+        console.log(userId);
 
     try {
         const result = await userService.createAnimalWithSighting(userId, req.body);
-        // console.log(result);
+        console.log(result);
         res.status(201).json(result);
 
     }catch (err) {
