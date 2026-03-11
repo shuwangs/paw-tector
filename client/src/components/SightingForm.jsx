@@ -142,7 +142,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                     <div className="add-header"> 
                         <div className="animal-icon">{getAnimalEmoji(selectedAnimal.animal_type)} </div>
                         <div><h2>{selectedAnimal.nickname}</h2></div>
-                        <button type="button" onClick={onClose}> x</button>
+                        <button className="close-btn" type="button" onClick={onClose}> x</button>
                     </div>
                 </div>
             </div>}
@@ -163,17 +163,17 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                         </label>
        
                 </div>
-                <div>
+                <div className="status-list">
                
-                    <button type="button" onClick={()=>{handleHealthStatus('healthy')}}>Healthy</button>
-                    <button type="button" onClick={()=>{handleHealthStatus('sick')}}>Sick</button>
-                    <button type="button" onClick={()=>{handleHealthStatus('injured')}}>Injured</button>
-                    <button type="button" onClick={()=>{handleHealthStatus('unknown')}}>Unknown</button>
+                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('healthy')}}>Healthy</button>
+                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('sick')}}>Sick</button>
+                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('injured')}}>Injured</button>
+                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('unknown')}}>Unknown</button>
 
                 </div>
                 
-                <div>
-                    <textarea
+                <div className="notes-ctn">
+                    <textarea 
                         name="notes" 
                         value={formData.notes}
                         onChange={handleChange}

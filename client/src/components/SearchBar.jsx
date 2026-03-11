@@ -8,11 +8,14 @@ const SearchBar = () => {
                 </div>
                 <div>
                     <select>
-                        <option>All Species </option>
+                        <option value="">All Species </option>
                         {/*TODO: hardcoded for now */}
-                        <option>Cat</option>
-                        <option>Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Dog">Dog</option>
                         <option>Rabbit</option>
+                        <option>Bird</option>
+                        <option>Bird</option>
+                        <option >Bird</option>
 
                     </select>
                 </div>

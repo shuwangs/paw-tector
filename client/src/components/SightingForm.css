@@ -1,12 +1,63 @@
-/* button {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-  color: white;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
-  border-radius: 16px;
-  cursor: pointer;
-} */
+
+.sighting-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color:  rgba(0, 0, 0, 0.35);
+}
+.sighting-modal {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  animation: modalFadeIn 0.2s ease;
+}
+/*  Add to Existing Animal */
+.found-details {
+    margin-top: 10px;
+    border: 1px solid var(--border-line);
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.found-details label{
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 700;
+    text-align: left;
+}
+
+.close-btn{
+    font-size: 1.5rem;
+    height: 40px;
+}
+
+.close-btn:hover{
+    scale: 1.1;
+}
+form .secondary-btn {
+    font-size: 1.1rem;
+    padding: 5px 25px;
+}
+
+.add-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.add-header .animal-icon{
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;;
+}
 
 form {
     max-width: 450px;
@@ -16,6 +67,8 @@ form {
     background-color: var(--secondary-primary);
     font-size: 1.1rem;
 }
+
+
 
 form .modal-title{
     font-size: 1rem;
@@ -45,50 +98,68 @@ form input {
     border: 1px solid var(--secondary_action_color);
     border-radius: 5px;
 }
-
-.sighting-modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  background-color:  rgba(0, 0, 0, 0.35);
-}
-.sighting-modal {
-  width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 1.5rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
-  animation: modalFadeIn 0.2s ease;
-}
-
-.breed-ctn {
+.status-list{
     display: flex;
-    gap: 12px;
+    flex-direction: row;
+    gap:10px;
+}
+.status-btn {
+    background-color: var(  --bg-secondary);
+    font-size: 1rem;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 12px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.status-btn:hover {
+    background-color: var( --primary_accent_color);
+    color:#ffffff
+}
+.notes-ctn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.notes-ctn textarea {
+    min-height: 90px;
+    min-width: 300px;
+    resize: vertical;
+    padding: 0.7rem 0.9rem;
+    border-radius: 12px;
+    border: 1px solid var(--primary_accent_color);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* add New animal */
+.nickname-ctn  {
+    text-align: left;
+    margin-top: 5px;
+}
+.breed-ctn, .color-ctn, .stray-ctn{
+    display: flex;
+    gap: 20px;
     width: 100%;
-}
-.found-details {
-    margin-top: 10px;
-    border: 1px solid var(--border-line);
-    display: flex;
-    gap: 12px;
-    width: 100%;
-}
-form .secondary-btn {
-    font-size: 1.1rem;
-    padding: 5px 25px;
+    padding: 5px 0px;
 }
 
-.add-header {
+/* Sighting Modal */
+.animal-list{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-
 }
-.add-header .animal-icon{
-    width: 40px;
-    height: 40px;
-    font-size: 2rem;;
+
+.animal-name-card {
+    padding: 5px 10px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    margin: 5px 5px;
+    min-width: 100px;
 }

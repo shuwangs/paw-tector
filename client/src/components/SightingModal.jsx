@@ -2,6 +2,7 @@ import React , {useState, useContext}from "react";
 
 import { useCurrentUser } from "../context/CurrentUserContext";
 import SightingForm from "./SightingForm";
+import './SightingForm.css';
 const SightingModal = ({ onClose }) => {
 
     const {trackedAnimals} = useCurrentUser();
@@ -40,14 +41,14 @@ const SightingModal = ({ onClose }) => {
                         ×
                 </button>
             </div>
-            <div className="divider" />
+            <div className="divider-animal-list" />
                 <p>Tracked Animals:</p>
                 <div className="animal-list">
                     {trackedAnimals.map((animal) => (
-                        <button
+                        <button 
                             key={animal.id}
                             type="button"
-                            className="animal-card"
+                            className="animal-name-card "
                             onClick={() => handleSelectAnimal(animal)}
                         >
                             <div>
@@ -60,10 +61,10 @@ const SightingModal = ({ onClose }) => {
                 </div>
 
                 <button
-                    type="button"
-                    className="add-new-animal-btn"
-                    onClick={handleAddNewAnimal}
 
+                    type="button"
+                    className="add-new-animal-btn primary-btn"
+                    onClick={handleAddNewAnimal}
                     >
                         + Add New Animal
                 </button>
