@@ -18,7 +18,7 @@ const MyRecords = () => {
 
                 <select value={currentUserId || ""}
                     onChange={(e) => setCurrentUserId(e.target.value)}>
-                    <option value={currentUserId || ""}>Volunteers</option>
+                    <option value="">Volunteers</option>
                     
                     {users.map((u) => (
                         <option key={u.id} value={u.id}>{u.user_name}</option>
