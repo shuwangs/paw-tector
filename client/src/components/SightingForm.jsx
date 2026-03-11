@@ -83,7 +83,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                             <option value="Dog">Dog</option>
                             <option value="Rabbit">Rabbit</option>
                             <option value="Raccoon">Raccoon</option>
-                            <option value="Others">Other</option>
+                            <option value="Other">Other</option>
                         </select>
                     </label>
                     <label >

@@ -169,3 +169,20 @@ form input {
     margin: 5px 5px;
     min-width: 100px;
 }
+
+select {
+  padding: 0.2rem 0rem;
+  border-radius: 8px;
+  border: 1px solid var(--secondary_action_color);
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  height: 30px;
+
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary_accent_color);
+  box-shadow: 0 0 0 2px rgba(24, 182, 125, 0.15);
+}
