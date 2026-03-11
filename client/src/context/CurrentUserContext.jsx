@@ -20,9 +20,7 @@ export const CurrentUserProvider = ({children}) => {
     const getTrackedAnimals = async (userId) => {
         if(!userId) return;
         setLoading(true);
-        setError(null);
-
-        
+        setError(null);   
         try {
             const result = await fetchTrackedAnimals(userId);
             console.log("tracked animals are : ", result);
@@ -114,6 +112,7 @@ export const CurrentUserProvider = ({children}) => {
         currentUserId,
         currentUserStats,
         setCurrentUserId,
+        getTrackedAnimals,
         trackedAnimals,
         setTrackedAnimals,
         loading,

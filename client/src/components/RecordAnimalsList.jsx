@@ -13,7 +13,7 @@ const RecordAnimalsList = () => {
         <div className='records-list-ctn'>        
             <div className='myrecord-header'> 
                 <h2>My Records 📋 </h2>
-                <button className='primary-btn'
+                <button className='primary-btn add-btn'
                 onClick={() =>setShowForm(true)}> Add New</button>
                    {showForm && (
                     <SightingModal onClose={() => setShowForm(false)} />

@@ -54,6 +54,14 @@
 
 
 /* Record Animal List */
+.add-btn {
+    height: 45px;
+}
+
+.add-btn:hover {
+    background: var(--secondary_accent_color);
+    transform: translateY(-2px);
+}
 
 .myrecord-header {
     display:flex;

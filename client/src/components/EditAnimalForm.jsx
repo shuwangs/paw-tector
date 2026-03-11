@@ -7,16 +7,16 @@ import { useCurrentUser } from "../context/CurrentUserContext.jsx";
 const EditAnimalForm = ({onClose, editingAnimal, }) => {
     // const initialForm = editingAnimal;
     const [
-    formData,
-    handleChange,
-    setFormData,
-    handleCheckboxChange,
-    resetForm,
-    handleClearForm,
-    handleHealthStatus
-    ] = useForm(editingAnimal.animal);
+        formData,
+        setFormData,
+        handleChange,
+        handleCheckboxChange,
+        resetForm,
+        handleClearForm,
+        handleHealthStatus
+        ] = useForm(editingAnimal.animal);
 
-    const {currentUserId, fetchTrackedAnimals} = useCurrentUser();
+    const {currentUserId, getTrackedAnimals, fetchTrackedAnimals, trackedAnimals, setTrackedAnimals} = useCurrentUser();
 
     useEffect(() => {
         console.log(editingAnimal);
@@ -38,8 +38,9 @@ const EditAnimalForm = ({onClose, editingAnimal, }) => {
             }
             const updatedAnimal = await updateTrackedAnimal(currentUserId, formData.individual_id, payload);
             console.log("updated animal:", updatedAnimal);
+            
+            await getTrackedAnimals(currentUserId);
             onClose();
-            fetchTrackedAnimals(currentUserId);
         } catch(err) {
             console.error("edit animal form submission error:", err);
         }
