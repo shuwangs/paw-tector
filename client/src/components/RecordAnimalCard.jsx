@@ -30,7 +30,7 @@ const RecordAnimalCard = ({animal}) => {
         <>
             <div className="animal-card">
                 <div className="animal-card-left">
-                    <div className="animal-icon">{getAnimalEmoji(animal.animal_type.toLowerCase())}</div>
+                    <div className="animal-icon">{getAnimalEmoji(animal.animal_type?.toLowerCase())}</div>
                     <div className="animal-details">
                         <div className="name-ctn">
                             <div className="name-area">{animal.nickname}</div>

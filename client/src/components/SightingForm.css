@@ -46,10 +46,24 @@ form input {
     border-radius: 5px;
 }
 
-/* form .primary-btn {
-    font-size: 1.1rem;
-    padding: 5px 25px;
-} */
+.sighting-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color:  rgba(0, 0, 0, 0.35);
+}
+.sighting-modal {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  animation: modalFadeIn 0.2s ease;
+}
 
 .breed-ctn {
     display: flex;
@@ -68,3 +82,13 @@ form .secondary-btn {
     padding: 5px 25px;
 }
 
+.add-header {
+    display: flex;
+    justify-content: space-between;
+
+}
+.add-header .animal-icon{
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;;
+}

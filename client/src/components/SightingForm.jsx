@@ -1,6 +1,7 @@
-import React,{useContext, useState} from "react";
+import React,{ useContext, useEffect, useState } from "react";
 import { createAnimalWithSighting, addNewSightingToExistingAnimal } from "../api/sightingsApi";
 import { useCurrentUser } from "../context/CurrentUserContext";
+import { getAnimalEmoji } from "../utils/helper.js";
 import useForm from '../utils/useForm.js';
 import './SightingForm.css'
 const SightingForm = ({onClose, mode, selectedAnimal}) => {
@@ -56,8 +57,6 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
             console.error(error);
         }
     }
-    
-
 
     return (
         <form onSubmit={handleSubmitForm}>
@@ -139,17 +138,18 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
             {/* choose to add sightings to existing animals */}
             {mode === "existing" &&            
              <div className="mode-existing">
-                {/* TODOS replace with icons */}
                 <div>
-                    <div> Icon </div>
-                    <div>Selected Animal: <span>{selectedAnimal.nickname}</span></div>
+                    <div className="add-header"> 
+                        <div className="animal-icon">{getAnimalEmoji(selectedAnimal.animal_type)} </div>
+                        <div><h2>{selectedAnimal.nickname}</h2></div>
+                        <button type="button" onClick={onClose}> x</button>
+                    </div>
                 </div>
             </div>}
 
 
             <div className="modal-content">
 
-                
                 <div className="found-details">
                  
                         <label>
@@ -182,7 +182,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 </div>
 
             </div>
-            {   mode ==- "new" &&
+            {   mode === "new" &&
                 <div className="btn-group">            
                     <button className="primary-btn" type="submit">Create Animal & Add Sighting</button>
                     <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>

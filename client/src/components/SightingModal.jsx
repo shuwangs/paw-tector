@@ -26,11 +26,11 @@ const SightingModal = ({ onClose }) => {
 
     return(
     <div className="sighting-modal-overlay" onClick={onClose} >
-        <div className="sighting-modal-header"
+        <div className="sighting-modal"
             onClick={(e) => e.stopPropagation()}>
         {mode === "select" &&
          <>
-
+            <div className="sighting-modal-header">
                 <h2>Select Animal</h2>
                 <button
                         type="button"
@@ -39,22 +39,24 @@ const SightingModal = ({ onClose }) => {
                     >
                         ×
                 </button>
-                <div className="divider" />
-                    <p>Tracked Animals:</p>
-                    <div className="animal-list">
-                        {trackedAnimals.map((animal) => (
-                            <button
+            </div>
+            <div className="divider" />
+                <p>Tracked Animals:</p>
+                <div className="animal-list">
+                    {trackedAnimals.map((animal) => (
+                        <button
                             key={animal.id}
                             type="button"
                             className="animal-card"
                             onClick={() => handleSelectAnimal(animal)}
-                            >
-                                <div>
-                                    <div className="name">{animal.nickname}</div>
-                                    <div className="species">{animal.species}</div>
-                                </div>
-                            </button>
-                        ))}
+                        >
+                            <div>
+                                <div className="name">{animal.nickname}</div>
+                                <div className="species">{animal.species}</div>
+                            </div>
+                        </button>
+                    ))}
+                   
                 </div>
 
                 <button

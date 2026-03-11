@@ -24,10 +24,18 @@ const userForm = (initialValues) => {
         }));
     }; 
 
-    const handleHealthStatus = (status) => {
-        setFormData((prev)=>({...prev, health_status: status}));
-    }
-  return [formData, handleChange, setFormData, handleCheckboxChange, resetForm, handleClearForm, handleHealthStatus];
+  const handleHealthStatus = (status) => {
+    setFormData((prev)=>({...prev, health_status: status}));
+  }
+  return [
+    formData,
+    setFormData,
+    handleChange,
+    handleCheckboxChange,
+    resetForm,
+    handleClearForm,
+    handleHealthStatus
+  ];
 };
 
 export default userForm;
