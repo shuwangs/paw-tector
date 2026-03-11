@@ -103,7 +103,7 @@ form input {
     flex-direction: row;
     gap:10px;
 }
-.status-btn {
+.status-ctn {
     background-color: var(  --bg-secondary);
     font-size: 1rem;
     padding: 8px 15px;
@@ -113,10 +113,16 @@ form input {
     font-weight: 500;
 }
 
-.status-btn:hover {
+.status-ctn:hover {
     background-color: var( --primary_accent_color);
     color:#ffffff
 }
+
+.status-ctn.active{
+    background: var(--primary_accent_color);
+    color:#ffffff
+}
+
 .notes-ctn {
     display: flex;
     flex-direction: column;

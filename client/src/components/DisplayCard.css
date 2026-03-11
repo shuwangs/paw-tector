@@ -2,7 +2,7 @@
     display:flex;
     flex-direction: row;
     align-items: center;
-    
+
 }
 
 
@@ -69,7 +69,9 @@
     background: var(--status-injured-bg);
     color: var(--status-injured-text);
 }
-
+.status-ctn.active{
+    background: var(--primary_accent_color);
+}
 
 /* For  */
 

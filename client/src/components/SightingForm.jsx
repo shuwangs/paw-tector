@@ -20,7 +20,7 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
         is_stray: true,
         // Sighting 
         location: "",
-        health_status: "healthy",
+        health_status: "",
         sighted_at: "",
         notes: ""
     }
@@ -165,10 +165,18 @@ const SightingForm = ({onClose, mode, selectedAnimal}) => {
                 </div>
                 <div className="status-list">
                
-                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('healthy')}}>Healthy</button>
-                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('sick')}}>Sick</button>
-                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('injured')}}>Injured</button>
-                    <button className="status-btn" type="button" onClick={()=>{handleHealthStatus('unknown')}}>Unknown</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "healthy" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('healthy')}}>Healthy</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "sick" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('sick')}}>Sick</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "injured" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('injured')}}>Injured</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "o" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('unknown')}}>Unknown</button>
 
                 </div>
                 
