@@ -166,6 +166,16 @@
   }
   .searchbar-filters{
     grid-template-columns: auto auto;
-    scale:09
+    scale:0.9
+  }
+  .date-range-inputs{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 992px) {
+  .searchbar-filters {
+    grid-template-columns: auto auto;
   }
 }
