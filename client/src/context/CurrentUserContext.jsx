@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUsers, getUserStats, fetchTrackedAnimals} from "../api/userApi.js";
+import { getUsers, getUserStats, fetchTrackedAnimals, onDeleteTrackedAnimal} from "../api/userApi.js";
 
 const CurrentUserContext = createContext();
 
@@ -15,7 +15,6 @@ export const CurrentUserProvider = ({children}) => {
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    
 
     const getTrackedAnimals = async (userId) => {
         if(!userId) return;
@@ -23,7 +22,6 @@ export const CurrentUserProvider = ({children}) => {
         setError(null);   
         try {
             const result = await fetchTrackedAnimals(userId);
-            console.log("tracked animals are : ", result);
             setTrackedAnimals(result);
         } catch(err) {
             setError(err.message || "Unknown error");
@@ -77,23 +75,14 @@ export const CurrentUserProvider = ({children}) => {
 
     const deleteTrackedAnimal = async (user_id, animal_id) => {
         const userId = Number(user_id);
-        console.log(userId);
         const individualId = Number(animal_id);
-
-        console.log(animal_id);
 
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
-                method: "DELETE"
-            })
+            await onDeleteTrackedAnimal(userId, individualId)
 
-            if (!response.ok) {
-                throw new Error(`Delete tracked animal failed (${response.status})`);
-            }
-
-            await getTrackedAnimals(user_id);
+            await getTrackedAnimals(userId);
 
         } catch(err) {
             setError(err.message || "Unknown error");

@@ -50,5 +50,18 @@ export const fetchTrackedAnimals = async (userId) => {
     return data
 }
 
+export const onDeleteTrackedAnimal = async (userId, individualId) =>{
+  
+    const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
+        method: "DELETE"
+    })
+
+    if (!response.ok) {
+        throw new Error(`Delete tracked animal failed (${response.status})`);
+    }
+
+    // const data = await response.json();
+    return true;
+}
   
             

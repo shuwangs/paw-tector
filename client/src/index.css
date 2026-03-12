@@ -12,10 +12,7 @@
   --primary_action_color: #22c55e;
   --secondary_action_color: #16a34a;
   font-family: 'Nunito';
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-main: "Inter", "Helvetica Neue", Arial, sans-serif;
 
   --status-healthy-text: #065f46;
   --status-healthy-bg: #d1fae5;
