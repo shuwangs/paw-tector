@@ -5,15 +5,24 @@ import {FcPrevious, FcNext } from "react-icons/fc";
 import './DisplayCard.css';
 
 const SightingsList = () => {
-    const {page, setPage, totalPage, sightings, loading, error } = useDiscover();
+    const {page, setPage, totalPage, displayedSightings, loading, error} = useDiscover();
+    if (loading) {
+        return <p>Loading sightings...</p>;
+    }
 
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
     return (
         <div className='discover-lists'>
             <div className='sightingsList-ctn'>
-                {sightings.map((sighting) => (
-                    <SightingCard key={sighting.id} sighting = {sighting} />
-                ))}
-        
+                {displayedSightings.length === 0 ? (
+                <p>No sightings found.</p>
+                ) : (
+                    displayedSightings.map((sighting) => (
+                        <SightingCard key={sighting.id} sighting={sighting} />
+                    ))
+                )}
             </div>
             <div className='pagination-ctn'>
                 <button

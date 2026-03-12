@@ -5,6 +5,7 @@ const DiscoverContext = createContext(null);
 
 export const DiscoverProvider = ({children}) => {
     const [sightings, setSightings] = useState([]);
+    const [displayedSightings, setDisplayedSightings] = useState([]);
     const [page, setPage]= useState(1);
     const [totalPage, setTotalPage] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -22,6 +23,7 @@ export const DiscoverProvider = ({children}) => {
             const result = await getSightings(page);
             console.log(result);
             setSightings(result.data);
+            setDisplayedSightings(result.data);
             setTotalPage(() => {
                 if (result.totalCount%result.limit === 0) {
                     setTotalPage (result.totalCount/result.limit)
@@ -51,6 +53,11 @@ export const DiscoverProvider = ({children}) => {
         }
     }
 
+    const resetDisplayedSightings = () => {
+        setDisplayedSightings(sightings);
+    };
+
+
     useEffect(() => {
         fetchSightings();
         fetchSightingsStats();
@@ -66,6 +73,9 @@ export const DiscoverProvider = ({children}) => {
         page, 
         setPage,
         totalPage,
+        displayedSightings,
+        setDisplayedSightings,
+        resetDisplayedSightings,
         setTotalPage,
         setSightings,
         loading,

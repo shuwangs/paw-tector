@@ -100,6 +100,10 @@
   outline: none;
   box-sizing: border-box;
 }
+.filter-group select {
+  /* appearance: auto; */
+  min-height: 50px;
+}
 .date-group {
   min-width: 0;
 }
@@ -109,7 +113,10 @@
   gap: 0.75rem;
 }
 .searchbar-bottom {
+  display: flex;
   margin-top: 1rem;
+  gap:20px;
+  justify-content: center;
 }
 .clear-filters-btn {
   display: inline-flex;
@@ -127,6 +134,22 @@
   text-decoration: underline;
 }
 
+.submit-filters-btn {
+  display: inline-flex;
+  align-items: center;
+  color: #33a85c;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+}
+
+.submit-filters-btn:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 768px) {
   .searchbar-top {
@@ -140,5 +163,9 @@
 
   .searchbar-card {
     padding: 1rem;
+  }
+  .searchbar-filters{
+    grid-template-columns: auto auto;
+    scale:09
   }
 }

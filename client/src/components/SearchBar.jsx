@@ -1,86 +1,159 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useDiscover } from "../context/DiscoverContext";
+import {onSearch} from "../api/sightingsApi";
 import "./SearchBar.css";
 import { FiSliders, FiSearch, FiXCircle } from "react-icons/fi";
+import { MdDataSaverOn } from "react-icons/md";
 
 const SearchBar = () => {
-  const animal_types = ["Cat", "Dog", "Rabbit", "Bird", "Other"];
-  const statuses = ["healthy", "sick", "injured", "unknown"];
+    const {page, sightings, displayedSightings, setDisplayedSightings, resetDisplayedSightings} = useDiscover();
+    const animal_types = ["Cat", "Dog", "Rabbit", "Bird", "Other"];
+    const statuses = ["healthy", "sick", "injured", "unknown"];
 
-  const [showFilters, setShowFilters] = useState(false);
+    const [showFilters, setShowFilters] = useState(false);
+    const [searchParams, setSearchParams] = useState({
+        searchText: "",
+        animal_type: "",
+        health_status: "",
+        start_date: "",
+        end_date: "",
+        page: page,
+        limit: 12
+    })
 
-  return (
-    <div className="searchbar-wrapper">
-      <div className="searchbar-card">
-        {/* TOP ROW */}
-        <div className="searchbar-top">
-          <div className="search-input-box">
-            <FiSearch className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search by nickname, type, or location..."
-            />
-          </div>
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setSearchParams((prev) => ({
+            ...prev, [name]: value
+        }))
+    }
+    const handleClearFilters = () => {
+        setSearchParams({
+            searchText: "",
+            animal_type: "",
+            health_status: "",
+            start_date: "",
+            end_date: "",
+            page: page,
+            limit: 12
+        });
+    };
+    const handleSearch = async (searchParams) => {
+        try {
+            const response = await onSearch(searchParams);
+        
+            // console.log("search params are: ", searchParams);
+            console.log("filtered results in Searchbar:", response);
+            setDisplayedSightings(response);
 
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="filter-toggle-btn"
-            type="button"
-          >
-            <FiSliders />
-            <span>Filters</span>
-          </button>
-        </div>
+        }catch (err) {
+            console.error("search error:", err);
+        }
+    }
 
-        {showFilters && (
-          <>
-            <div className="searchbar-divider"></div>
-
-            <div className="searchbar-filters">
-              <div className="filter-group">
-                <label htmlFor="status">Health Status</label>
-                <select id="status" defaultValue="">
-                  <option value="">All Status</option>
-                  {statuses.map((status) => (
-                    <option key={status} value={status.toLowerCase()}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="filter-group">
-                <label htmlFor="animalType">Animal Type</label>
-                <select id="animalType" defaultValue="">
-                  <option value="">All Types</option>
-                  {animal_types.map((animalType) => (
-                    <option key={animalType} value={animalType.toLowerCase()}>
-                      {animalType}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="filter-group date-group">
-                <label>Date Range</label>
-                <div className="date-range-inputs">
-                  <input type="date" />
-                  <input type="date" />
+    return (
+        <div className="searchbar-wrapper">
+            <div className="searchbar-card">
+                {/* TOP ROW */}
+                <div className="searchbar-top">
+                <div className="search-input-box">
+                    <FiSearch className="search-icon" />
+                    <input
+                    type="text"
+                    name="searchText"
+                    value={searchParams.searchText}
+                    onChange={handleChange}
+                    placeholder="Search by nickname, type, or location..."
+                    />
                 </div>
-              </div>
-            </div>
 
-            <div className="searchbar-bottom">
-              <button 
-              className="clear-filters-btn" type="button">
-                <FiXCircle />
-                <span>Clear all filters</span>
-              </button>
+                <button
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="filter-toggle-btn"
+                    type="button"
+                   
+                >
+                    <FiSliders />
+                    <span>Filters</span>
+                </button>
+                </div>
+
+                {showFilters && (
+                <>
+                    <div className="searchbar-divider"></div>
+
+                    <div className="searchbar-filters">
+                    <div className="filter-group">
+                        <label htmlFor="status">Health Status</label>
+                        <select 
+                            id="status"
+                            name="health_status" 
+                            value={searchParams.health_status}
+                            onChange={handleChange}>
+                        <option value="">All Status</option>
+                        {statuses.map((status) => (
+                            <option key={status} value={status.toLowerCase()}>
+                            {status}
+                            </option>
+                        ))}
+                        </select>
+                    </div>
+
+                    <div className="filter-group">
+                        <label htmlFor="animalType">Animal Type</label>
+                        <select 
+                            id="animalType" 
+                            name="animal_type"
+                            value={searchParams.animal_type}
+                            onChange={handleChange}>
+                        <option value="">All Types</option>
+                        {animal_types.map((animalType) => (
+                            <option key={animalType} value={animalType.toLowerCase()}>
+                            {animalType}
+                            </option>
+                        ))}
+                        </select>
+                    </div>
+
+                    <div className="filter-group date-group">
+                        <label>Date Range</label>
+                        <div className="date-range-inputs">
+                        <input 
+                            type="date" 
+                            name="start-date"
+                            value={searchParams.start_date}
+                            onChange={handleChange} />
+                        <input 
+                            type="date"
+                            name="end-date"
+                            value={searchParams.end_date}
+                            onChange={handleChange} />
+                        </div>
+                    </div>
+                    </div>
+
+                    <div className="searchbar-bottom">
+                        <button
+                            className="submit-filters-btn" 
+                            type="button"
+                            onClick={() =>handleSearch(searchParams)}>
+                            <MdDataSaverOn />
+                            <span>Filter</span>
+                        </button>
+                        <button 
+                            className="clear-filters-btn" 
+                            type="button"
+                            onClick={handleClearFilters}
+                        >
+                            <FiXCircle />
+                            <span>Clear all filters</span>
+                        </button>
+                    </div>
+                </>
+                )}
             </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default SearchBar;
