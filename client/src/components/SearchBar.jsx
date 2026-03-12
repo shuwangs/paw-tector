@@ -37,12 +37,13 @@ const SearchBar = () => {
             page: page,
             limit: 12
         });
+        resetDisplayedSightings();
     };
     const handleSearch = async (searchParams) => {
         try {
             const response = await onSearch(searchParams);
         
-            // console.log("search params are: ", searchParams);
+            console.log("search params are: ", searchParams);
             console.log("filtered results in Searchbar:", response);
             setDisplayedSightings(response);
 
@@ -108,7 +109,7 @@ const SearchBar = () => {
                             onChange={handleChange}>
                         <option value="">All Types</option>
                         {animal_types.map((animalType) => (
-                            <option key={animalType} value={animalType.toLowerCase()}>
+                            <option key={animalType} value={animalType}>
                             {animalType}
                             </option>
                         ))}

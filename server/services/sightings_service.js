@@ -51,10 +51,10 @@ export const searchSightings = async ({searchText, health_status, animal_type, s
     const values = [];
     
     if(searchText !== null && searchText !== undefined && searchText.trim() !== ""){
-        const keyword = searchText.trim();
+        const keyword = `%${searchText.trim()}%`;
         values.push(keyword);
         const idx = values.length;
-        conditions.push(`LOWER(s.address) LIKE LOWER($${idx }) 
+        conditions.push(`LOWER(s.address) LIKE LOWER($${idx })
             OR LOWER(i.nickname) LIKE LOWER($${idx })`)
     }
     if(health_status !== null && health_status !== undefined && health_status.trim() !== "") {
@@ -65,7 +65,7 @@ export const searchSightings = async ({searchText, health_status, animal_type, s
     if(animal_type !== null && animal_type !== undefined && animal_type.trim() !== "") {
         values.push(animal_type);
         const idx = values.length;
-        conditions.push(`animal_type = $${idx}`)
+        conditions.push(`t.name = $${idx}`)
     }
     if (start_date !== null && start_date !== undefined && start_date.trim() !== "") {
         values.push(start_date.trim());
