@@ -14,7 +14,6 @@ router.get('/:individualId', async (req, res ) => {
     }
     try{
         const animalData = await animalService.fetchAnimalData(animal_id);  
-        console.log(animalData)
 
         if (!animalData) {
             return res.status(404).json({
@@ -35,7 +34,7 @@ router.get('/:individualId', async (req, res ) => {
 })
 
 router.get('/:individualId/stats', async (req, res ) => {
-    // console.log("fetching an animal");
+
     const animal_id = Number(req.params.individualId);
     if((Number.isNaN(animal_id))) {
         return res.status(400).json({
@@ -46,7 +45,6 @@ router.get('/:individualId/stats', async (req, res ) => {
 
     try{
         const stats = await animalService.getAnimalStats(animal_id);  
-        console.log(stats)
 
         if (!stats) {
             return res.status(404).json({

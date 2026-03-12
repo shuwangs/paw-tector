@@ -23,7 +23,6 @@ export const getAllSightings = async (page = 1, limit = 12) => {
 }
 
 export const getSightingsStats = async () => {
-    // console.log("testing: reached getSightingsStats in sightings service")
     const {rows} = await pool.query(
     `
     SELECT
@@ -33,7 +32,6 @@ export const getSightingsStats = async () => {
     (SELECT COUNT(DISTINCT address) FROM sightings) AS locations;
     `
     )
-    // console.log(rows);
     return rows [0];
 }
 
@@ -118,6 +116,5 @@ export const searchSightings = async ({searchText, health_status, animal_type, s
 
     console.log("formated result is: ", formatedRes);
     return formatedRes;
-    // return rows;
     
 }

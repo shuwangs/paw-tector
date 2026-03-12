@@ -1,7 +1,6 @@
 import pool from '../db/db.js';
 
 export const fetchAnimalData = async(individualId) =>{
-    console.log(individualId);
     const individualInfo = await pool.query(
         `
         SELECT 
@@ -39,6 +38,5 @@ export const getAnimalStats = async(individualId) =>{
         `, [individualId]
     );
 
-    console.log("individual animal stats: ", rows[0]);
     return rows[0];
 }

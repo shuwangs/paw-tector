@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     }
 })
 router.get('/stats', async (req, res) => {
-    // res.send("Hello from Router");
+
     try {
         const stats = await sightingsService.getSightingsStats();
         res.json(stats);
@@ -28,9 +28,8 @@ router.get('/stats', async (req, res) => {
 })
 
 router.get('/search', async (req, res) => {
-    // res.send("Hello from Router");
     const searchParams = req.query;
-    console.log("user search on: ", searchParams);
+
     try {
         const {searchText, health_status, animal_type, start_date, end_date} = req.query;
         const result = await sightingsService.searchSightings({searchText, health_status, animal_type, start_date, end_date});
