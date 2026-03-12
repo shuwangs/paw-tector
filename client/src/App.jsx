@@ -15,30 +15,19 @@ function App() {
   return (
     <BrowserRouter>
       <TopNav />
+       <DiscoverProvider>
+        <CurrentUserProvider>
+          <div className='app-container'>
+            <Routes>
+              <Route path='/' element={<HomePage />  } />
+              <Route path = '/discover' element={<DiscoverPage />}  />
+              <Route path='/records' element={  <MyRecords /> }/>
+              <Route path ='/individuals/:individualId' element={<AnimalProfilePage /> } />
+            </Routes>
+        </div>
+        </CurrentUserProvider>
+      </DiscoverProvider>
 
-      <div className='app-container'>
-        <Routes>
-          <Route path='/' element={
-            <DiscoverProvider>
-              <HomePage />
-            </DiscoverProvider>
-            } />
-          <Route path = '/discover' element={
-            <DiscoverProvider>
-              <DiscoverPage />
-            </DiscoverProvider>} />
-          <Route path='/records' element={ 
-            <CurrentUserProvider>
-              <MyRecords />
-            </CurrentUserProvider>} />
-
-            <Route path ='/individuals/:individualId'
-              element={<CurrentUserProvider>
-              <AnimalProfilePage />
-             </CurrentUserProvider> } />
-
-        </Routes>
-    </div>
     </BrowserRouter>
   )
 }
