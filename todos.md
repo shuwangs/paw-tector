@@ -20,9 +20,9 @@
 - [X] update animal record
 
 3.2 individual  profile
-- [ ] count of how many times each individual has been sighted
+- [X] count of how many times each individual has been sighted
 - [ ] first sighting date
-- [ ] most recent sighting date
+- [X] most recent sighting date
 
 4. Use Context 
 - [X] Current User Context
@@ -46,7 +46,7 @@
 - [ ] show empty/loading/error states for fetches
 
 6. optional
-- [ ] Let users search for sightings within a certain date range
+- [X] Let users search for sightings within a certain date range
 - [X] paging
   - [ ] let user select display limits
 - [ ] discovery map view

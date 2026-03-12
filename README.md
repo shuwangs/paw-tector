@@ -67,7 +67,7 @@ Each animal has a dedicated profile page displaying:
 - Frontend: React, JavaScript, CSS
 - Backend: Node.js, Express
 - Database: PostgreSQL
-- Other: REST API, useReducer state management
+- Other: REST API, useContext for state management
 
 - Pagination queries
 
@@ -76,6 +76,9 @@ Each animal has a dedicated profile page displaying:
 ### 🗂 Database design (ERD)
 Paw-tector uses a relational PostgreSQL database to model users, animals, and community sightings.
 ![ERD](./docs/erd.png)
+
+# APIs
+To be included
 
 ## How to start
 ### Clone respository
