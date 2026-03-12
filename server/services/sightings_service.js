@@ -39,14 +39,20 @@ export const getSightingsStats = async () => {
 
 export const searchSightings = async ({searchText, health_status, animal_type, start_date, end_date, page =1, limit = 12}) => {
     console.log("Searching in db...");
+
     const offset = (page-1) * limit;
-    let query=`
+    let dataBaseQuery=`
         SELECT s.id, s.user_id, s.address, s.zipcode, s.state, s.latitude, s.longitude, s.health_status,
         s.need_help, s.note, s.image_url, s.sighted_at, i.nickname, i.type_id, i.breed_name, i.age_group, t.name as animal_type
         FROM sightings s 
         JOIN individuals i ON s.individual_id = i.id
         JOIN animal_types t ON i.type_id = t.id`
-    
+
+    const fromQuery = `
+        FROM sightings s
+        JOIN individuals i ON s.individual_id = i.id
+        JOIN animal_types t ON i.type_id = t.id
+    `;
     const conditions = [];
     const values = [];
     
@@ -77,18 +83,41 @@ export const searchSightings = async ({searchText, health_status, animal_type, s
         const idx = values.length;
         conditions.push(`s.sighted_at <= $${idx}`);
     }
-    if(conditions.length > 0){
-        query += ` WHERE ${conditions.join(" AND ")}`;
-    }
-    query += ` ORDER BY s.sighted_at DESC`;
+
+    const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+    const countQuery = `
+        SELECT COUNT(*) AS count
+        ${fromQuery}
+        ${whereClause}
+        `;
+    console.log(`Count query is: `, countQuery);
+    const countResult = await pool.query(countQuery, values);
+    const totalCount = countResult.rows[0].count;
+    console.log("total counts: ", totalCount);
+    
+    let dataQuery = `${dataBaseQuery} ${whereClause} ORDER BY s.sighted_at DESC`;
+
     values.push(limit);
     values.push(offset);
-    query += ` LIMIT $${values.length - 1} OFFSET $${values.length}`;
-    console.log(query);
+
+    // Get the total Counts
+  
+    dataQuery += ` LIMIT $${values.length - 1} OFFSET $${values.length}`;
+    console.log(dataQuery);
 
     console.log(values);
-    const { rows } = await pool.query(query, values);
+    const { rows } = await pool.query(dataQuery, values);
     console.log("searching result: ", rows);
-    return rows;
+
+    const formatedRes =  {
+        data: rows,
+        totalCount: totalCount,
+        page: page, 
+        limit: limit
+    };
+
+    console.log("formated result is: ", formatedRes);
+    return formatedRes;
+    // return rows;
     
 }

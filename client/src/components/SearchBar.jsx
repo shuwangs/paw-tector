@@ -6,7 +6,8 @@ import { FiSliders, FiSearch, FiXCircle } from "react-icons/fi";
 import { MdDataSaverOn } from "react-icons/md";
 
 const SearchBar = () => {
-    const {page, sightings, displayedSightings, setDisplayedSightings, resetDisplayedSightings} = useDiscover();
+    const {page, sightings, displayedSightings, setDisplayedSightings, 
+        resetDisplayedSightings,fetchSearchResult, isSearching, setIsSearching} = useDiscover();
     const animal_types = ["Cat", "Dog", "Rabbit", "Bird", "Other"];
     const statuses = ["healthy", "sick", "injured", "unknown"];
 
@@ -37,20 +38,14 @@ const SearchBar = () => {
             page: page,
             limit: 12
         });
+        setIsSearching(false);
         resetDisplayedSightings();
     };
-    const handleSearch = async (searchParams) => {
-        try {
-            const response = await onSearch(searchParams);
-        
-            console.log("search params are: ", searchParams);
-            console.log("filtered results in Searchbar:", response);
-            setDisplayedSightings(response);
 
-        }catch (err) {
-            console.error("search error:", err);
-        }
-    }
+    const handleSearch = async () => {
+        setIsSearching(true);
+        await fetchSearchResult(searchParams);
+    };
 
     return (
         <div className="searchbar-wrapper">
@@ -137,7 +132,7 @@ const SearchBar = () => {
                         <button
                             className="submit-filters-btn" 
                             type="button"
-                            onClick={() =>handleSearch(searchParams)}>
+                            onClick={handleSearch}>
                             <MdDataSaverOn />
                             <span>Filter</span>
                         </button>
