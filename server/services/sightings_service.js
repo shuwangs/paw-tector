@@ -58,8 +58,8 @@ export const searchSightings = async ({searchText, health_status, animal_type, s
         const keyword = `%${searchText.trim()}%`;
         values.push(keyword);
         const idx = values.length;
-        conditions.push(`LOWER(s.address) LIKE LOWER($${idx })
-            OR LOWER(i.nickname) LIKE LOWER($${idx })`)
+        conditions.push(`(LOWER(s.address) LIKE LOWER($${idx })
+            OR LOWER(i.nickname) LIKE LOWER($${idx }))`)
     }
     if(health_status !== null && health_status !== undefined && health_status.trim() !== "") {
         values.push(health_status);
