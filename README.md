@@ -110,8 +110,14 @@ Covered functions include:
 - Add new sighting to existing animal
 - Fetch animal history
 - Fetch animal statistics
+
 ![Frontend testing coverage](./client/public/screenshot-client-api-coverage.png)
 
+### Frontend component tests were implemented using Vitest and React Testing Library.
+- Rendering form fields correctly based on component mode
+- Handling user input changes
+- Submitting forms and triggering API calls
+- Conditional rendering for different component states
 
 ## How to start
 ### Clone respository
