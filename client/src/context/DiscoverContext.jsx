@@ -16,7 +16,15 @@ export const DiscoverProvider = ({children}) => {
         total_volunteers: 0,
         locations: 0});
     const [isSearching, setIsSearching] = useState(false);
-    const [searchParams, setSearchParams] = useState(null);
+    const [searchParams, setSearchParams] = useState({
+        searchText: "",
+        animal_type: "",
+        health_status: "",
+        start_date: "",
+        end_date: "",
+        page: page,
+        limit: 12
+    })
     const fetchSightings = async () => {    
         setLoading(true);
         setError(null);
@@ -81,6 +89,8 @@ export const DiscoverProvider = ({children}) => {
     useEffect(() => {
         fetchSightingsStats();
     }, []);
+
+
     const value = {
         sightings,
         stats,
@@ -89,6 +99,7 @@ export const DiscoverProvider = ({children}) => {
         totalPage,
         displayedSightings,
         isSearching, setIsSearching,
+        searchParams, setSearchParams,
         setDisplayedSightings,
         resetDisplayedSightings,
         setTotalPage,

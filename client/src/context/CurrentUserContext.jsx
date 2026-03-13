@@ -107,7 +107,7 @@ export const CurrentUserProvider = ({children}) => {
         loading,
         error,
         fetchTrackedAnimals,
-        deleteTrackedAnimal
+        deleteTrackedAnimal,
     }
     
 

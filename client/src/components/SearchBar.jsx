@@ -6,21 +6,13 @@ import { FiSliders, FiSearch, FiXCircle } from "react-icons/fi";
 import { MdDataSaverOn } from "react-icons/md";
 
 const SearchBar = () => {
-    const {page, sightings, displayedSightings, setDisplayedSightings, 
-        resetDisplayedSightings,fetchSearchResult, isSearching, setIsSearching} = useDiscover();
+    const {page, setDisplayedSightings, 
+        resetDisplayedSightings,fetchSearchResult, setIsSearching, searchParams, setSearchParams} = useDiscover();
     const animal_types = ["Cat", "Dog", "Rabbit", "Bird", "Other"];
     const statuses = ["healthy", "sick", "injured", "unknown"];
 
     const [showFilters, setShowFilters] = useState(false);
-    const [searchParams, setSearchParams] = useState({
-        searchText: "",
-        animal_type: "",
-        health_status: "",
-        start_date: "",
-        end_date: "",
-        page: page,
-        limit: 12
-    })
+
 
     const handleChange = (event) => {
         const {name, value} = event.target;

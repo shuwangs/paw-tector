@@ -13,36 +13,36 @@ const AnimalProfilePage = () => {
     const [loading, setLoading] = useState(false);
     const animalId = useParams().individualId;
 
-    const fetchAnimalHistory = async (animalId) =>{
-        setError(null);
-        setLoading(true);
-        try {
-            const animalHistory = await getAnimalHistory(animalId);
-            console.log("fetch animal History: ", animalHistory)
-            setHistory(animalHistory);
-        } catch(err) {
+    // const fetchAnimalHistory = async (animalId) =>{
+    //     setError(null);
+    //     setLoading(true);
+    //     try {
+    //         const animalHistory = await getAnimalHistory(animalId);
+    //         console.log("fetch animal History: ", animalHistory)
+    //         setHistory(animalHistory);
+    //     } catch(err) {
 
-            setError(err.message || "Unknown error");
-        }finally{
-            setLoading(false);
-        }
-    }
+    //         setError(err.message || "Unknown error");
+    //     }finally{
+    //         setLoading(false);
+    //     }
+    // }
 
 
-    const fetchAnimalStats = async (animalId) =>{
-        setError(null);
-        setLoading(true);
-        try {
-            const stats = await getAnimalStats(animalId);
-            console.log("fetch animal Stats: ", stats)
-            setAnimalStats(stats);
-        } catch(err) {
+    // const fetchAnimalStats = async (animalId) =>{
+    //     setError(null);
+    //     setLoading(true);
+    //     try {
+    //         const stats = await getAnimalStats(animalId);
+    //         console.log("fetch animal Stats: ", stats)
+    //         setAnimalStats(stats);
+    //     } catch(err) {
 
-            setError(err.message || "Unknown error");
-        }finally{
-            setLoading(false);
-        }
-    }
+    //         setError(err.message || "Unknown error");
+    //     }finally{
+    //         setLoading(false);
+    //     }
+    // }
 
     useEffect(() =>{
         const fetchAnimalData = async()=> {
