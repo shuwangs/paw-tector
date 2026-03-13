@@ -2,7 +2,8 @@
 Paw-tector is a community-based web application that allows volunteers to record stray animal sightings and track their health status over time.
 The goal is to support local shelters and TNR (Trap-Neuter-Return) programs by identifying frequently sighted animals and hotspot areas.
 
-## Demo will be here.
+## Demo
+![Paw-tector](/client/public/pawtector.gif)
 
 ## 🚀 Features
 
