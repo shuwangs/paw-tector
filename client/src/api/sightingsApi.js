@@ -4,7 +4,7 @@ export const getSightings = async (page) => {
   if (!response.ok) {
     throw new Error("Failed to fetch sightings");
   }
-  const data = response.json();
+  const data = await response.json();
   console.log(data);
   return data;
 };
