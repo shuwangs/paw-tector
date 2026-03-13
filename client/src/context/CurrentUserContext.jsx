@@ -68,6 +68,7 @@ export const CurrentUserProvider = ({children}) => {
         fetchCurrentUserStats(currentUserId);
     },[])
 
+
     useEffect(() => {
         getTrackedAnimals(currentUserId);
         fetchCurrentUserStats(currentUserId);

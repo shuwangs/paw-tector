@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {Link, useParams} from 'react-router-dom';
 import {getAnimalHistory, getAnimalStats} from '../api/animalApi.js'
 import { capitalize, getAnimalEmoji } from "../utils/helper.js";
+import { useCurrentUser } from "../context/CurrentUserContext.jsx";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import './AnimalProfilePage.css'
 
@@ -44,11 +45,26 @@ const AnimalProfilePage = () => {
     }
 
     useEffect(() =>{
-        console.log(animalId)
-        fetchAnimalHistory(animalId);
-        fetchAnimalStats(animalId);
-        console.log("history :", history);
-        console.log("stats :", animalStats);
+        const fetchAnimalData = async()=> {
+            setLoading (true);
+            setError(null);
+        
+            try {
+                const  [animalHistory, stats] = await Promise.all([
+                    getAnimalHistory(animalId),
+                    getAnimalStats(animalId),
+                ]);
+                setHistory(animalHistory);
+                setAnimalStats(stats);
+
+            } catch (err) {
+                setError(err.message || "Unknown error");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchAnimalData();
 
     }, [animalId])
 

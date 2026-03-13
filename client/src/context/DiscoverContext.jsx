@@ -76,7 +76,7 @@ export const DiscoverProvider = ({children}) => {
         } else {
             fetchSightings();
         }
-    }, [ isSearching, searchParams]);
+    }, [ page, isSearching, searchParams]);
 
     useEffect(() => {
         fetchSightingsStats();
