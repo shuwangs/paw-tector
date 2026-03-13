@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
-import { getSightings, getSightingsStats, createAnimalWithSighting, addNewSightingToExistingAnimal } from '../sightingsApi.js';
+import { getSightings, getSightingsStats, createAnimalWithSighting, addNewSightingToExistingAnimal, onSearch } from '../sightingsApi.js';
 
 describe("SighgintsAPi", () => {
     beforeEach(() => {
@@ -55,7 +55,17 @@ describe("SighgintsAPi", () => {
         expect(result.animals_tracked).toBe(14);
     })
 
-    test("createAnimalWithSighting should create animal with sighting successfully", async () => {
+    test("getSightingsStats: Should throw error when failed", async () => {
+
+        globalThis.fetch.mockResolvedValueOnce({
+            ok: false,
+        });
+
+        await expect(getSightingsStats()).rejects.toThrow("Failed to get sightings stats");
+    })
+
+
+    test("createAnimalWithSighting: should create animal with sighting successfully", async () => {
         const mockForm = {
             nickname: "Bobo",
             animal_type: "Cat",
@@ -140,5 +150,61 @@ describe("SighgintsAPi", () => {
 
     })
 
+    test("addNewSightingToExistingAnimal: should throw eror when POST failed", async () => {
+        const mockForm ={
+            individual_id: 10,
+            address: "123 Ave",
+            health_status: "healthy",
+        }
+        globalThis.fetch.mockResolvedValueOnce({
+            ok: false,
+        })
+
+        await expect(addNewSightingToExistingAnimal(5, mockForm)).rejects.toThrow("Failed to create animal");
+
+    })
+
+    test ("onSearch: should return etch filtered sightings successfully", async () =>{
+        const searchParams = {
+            searchText: "cat",
+            animal_type: "Cat",
+            health_status: "healthy",
+            page: 1,
+            limit: 12
+        };
+        const mockResponse = {
+            data: [{ id: 1, nickname: "World" }],
+            totalCount: 1,
+            page: 1,
+            limit: 12
+        };
+
+        globalThis.fetch.mockResolvedValueOnce({
+            ok: true,
+            json: async () => mockResponse
+        });
+    const result = await onSearch(searchParams);
+
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      "/api/sightings/search?searchText=cat&animal_type=Cat&health_status=healthy&page=1&limit=12"
+    );
+
+    expect(result).toEqual(mockResponse);
+    expect(result.data).toHaveLength(1);
+
+    })
+
+     test("should throw error when search request fails", async () => {
+
+    const searchParams = { searchText: "dog" };
+
+    globalThis.fetch.mockResolvedValueOnce({
+      ok: false
+    });
+
+    await expect(onSearch(searchParams)).rejects.toThrow(
+      "Failed to delete animal"
+    );
+  });
 })
 
