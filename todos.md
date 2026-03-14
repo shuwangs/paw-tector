@@ -48,7 +48,12 @@
 6. optional
 - [X] Let users search for sightings within a certain date range
 - [X] paging
-  - [ ] let user select display limits
-- [ ] discovery map view
 - [X] Home page stats  GET /api/stats
 - [X] My record page count of my sightings
+
+
+7. Optimization:
+- [ ] Sighted_at should not greater than today
+- [ ] UI delay (tracked Animal and Stats) after add and editing 
+- [ ] use toast to give user message.
+- [ ] let user select display limits
