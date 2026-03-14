@@ -8,7 +8,7 @@ import { MdDataSaverOn } from "react-icons/md";
 const SearchBar = () => {
     const {page, setDisplayedSightings, 
         resetDisplayedSightings,fetchSearchResult, setIsSearching, searchParams, setSearchParams} = useDiscover();
-    const animal_types = ["Cat", "Dog", "Rabbit", "Bird", "Other"];
+    const animal_types = ["Cat", "Dog", "Rabbit", "Bird", "Raccoon","Other"];
     const statuses = ["healthy", "sick", "injured", "unknown"];
 
     const [showFilters, setShowFilters] = useState(false);
