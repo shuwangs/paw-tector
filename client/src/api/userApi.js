@@ -7,7 +7,61 @@ export const getUsers = async () => {
     return response.json();
 };
 
+export const getUserStats = async (userId) =>{
+    const response = await fetch(`/api/users/${Number(userId)}/stats`);
+    if(!response.ok) {
+        throw new Error(`Fetch user stats failed (${response.status})`);
+    }
+    const data = await response.json();
+    return data;
+     
+}
 
-// export const getUserTrackedAnimal = async() => {
+export const updateTrackedAnimal = async (user_id, animal_id, payload )=> {
+    console.log("edit animal form submission");
+    const userId = Number(user_id);
+    const individualId = Number(animal_id);
+    console.log(payload);
 
-// }
+    
+    const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify(payload)      
+        })
+
+    if (!response.ok) {
+        throw new Error(`Failed to update animal (${response.status})`);
+    }
+    const updatedAnimal = await response.json();
+    return updatedAnimal;
+
+}
+
+export const fetchTrackedAnimals = async (userId) => {
+    const response = await fetch(`/api/users/${userId}/tracked-animals`);
+    if(!response.ok) {
+        throw new Error(`Fetch tracked animals failed (${response.status})`);
+    }
+    const data = await response.json();
+
+    return data
+}
+
+export const onDeleteTrackedAnimal = async (userId, individualId) =>{
+  
+    const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
+        method: "DELETE"
+    })
+
+    if (!response.ok) {
+        throw new Error(`Delete tracked animal failed (${response.status})`);
+    }
+
+    // const data = await response.json();
+    return true;
+}
+  
+            

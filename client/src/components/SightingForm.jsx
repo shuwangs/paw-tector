@@ -1,104 +1,208 @@
-import React,{useState} from "react"
+import React,{ useContext, useEffect, useState } from "react";
+import { createAnimalWithSighting, addNewSightingToExistingAnimal } from "../api/sightingsApi";
+import { useCurrentUser } from "../context/CurrentUserContext";
+import { getAnimalEmoji } from "../utils/helper.js";
+import useForm from '../utils/useForm.js';
 import './SightingForm.css'
-const SightingForm = ({onClose}) => {
+const SightingForm = ({onClose, mode, selectedAnimal}) => {
     // TODOS
     // if the animal is in the db, add sightings only
+    console.log("selected animal is: ", selectedAnimal);
+    const {currentUserId, setTrackedAnimals} = useCurrentUser();
+
     const initialForm = {
         nickname: "",
         species: "",
         breed: "",
-
+        color: "",
+        age_group: "unknown",
+        is_sterilized: false,
+        is_stray: true,
         // Sighting 
         location: "",
-        health_status: "healthy",
+        health_status: "",
         sighted_at: "",
         notes: ""
     }
-    const [form, setForm] = useState(initialForm);
 
-    const handleChange = ((event) => {
-        setForm((prev)=>({ ...prev, [event.target.name]: event.target.value}));
-    })
 
-    const handleHealthStatus = (status) => {
-        setForm((prev)=>({...prev, health_status: status}));
-    }
-    
-    const handleClearForm = () => setForm(initialForm);
+    const [formData, setFormData, handleChange, handleCheckboxChange, resetForm, handleClearForm, handleHealthStatus] = useForm(initialForm);
 
-    const handleSubmitForm = (e) => {  
+    console.log(mode);
+
+    const handleSubmitForm = async (e) => {  
         e.preventDefault();
-        // TODOS:  Post to the db
-        console.log(form);
+        try {
+            if (mode == "new") {
+                const newAnimal = await createAnimalWithSighting(currentUserId, formData);
+                console.log(newAnimal);
+                onClose();
+                setTrackedAnimals(prev => [...prev, newAnimal]);    
+            } else if (mode === "existing") {
+                console.log(mode);
+                const payload = {
+                    // user_id: currentUserId,
+                    individual_id: selectedAnimal.individual_id,
+                    address: formData.location,
+                    health_status: formData.health_status,
+                    sighted_at: formData.sighted_at,
+                    notes: formData.notes,
+                };
+                const newSighting = await addNewSightingToExistingAnimal(currentUserId, payload);
+                console.log(newSighting);
+                onClose();
+
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
         <form onSubmit={handleSubmitForm}>
-            <div className="modal-title">
-                <h1>Add New Animal 🐾</h1>
-                <button type="button" onClick={onClose}> x</button>
-            </div>
+            {
+            mode==="new" && <div className="mode-new">
+                <div className="modal-title">
+                    <h1>Add New Animal 🐾</h1>
+                    <button type="button" onClick={onClose}> x</button>
+                </div>
 
-            <div className="modal-content">
                 <div className="nickname-ctn">
                     <label>
                         NickName*
-                        <input type="text" name="nickname" value={form.nickname} onChange={handleChange}/>
+                        <input type="text" name="nickname" value={formData.nickname} onChange={handleChange}/>
                     </label>
                 </div>
 
                 <div className="breed-ctn">
                     <label>
                         Species*
-                        <select name="species" defaultValue={form.species}  onChange={handleChange}>
-                            <option >Select...</option>
-                            <option>Cat</option>
-                            <option>Dog</option>
-                            <option>Rabbit</option>
+                        <select name="species" value={formData.species}  onChange={handleChange}>
+                            <option value="">Select...</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Dog">Dog</option>
+                            <option value="Rabbit">Rabbit</option>
+                            <option value="Raccoon">Raccoon</option>
+                            <option value="Other">Other</option>
                         </select>
                     </label>
-                    <label value={form.breed} onChange={handleChange}>
+                    <label >
                         Breed
-                        <input name="breed" type="text" placeholder="Optional"  />
+                        <input name="breed" value={formData.breed} onChange={handleChange} type="text" placeholder="Optional"  />
                     </label>
                 </div>
+
+                <div className="color-ctn">
+                    <label>
+                        Age*
+                        <select name="age_group" value={formData.age_group}  onChange={handleChange}>
+                            <option value="unknown">Unknown</option>
+                            <option value="baby">Babe</option>
+                            <option value="young">Young</option>
+                            <option value="adult">Adult</option>
+                            <option value="senior">Senior</option>
+                        </select>
+                    </label>
+                    <label >
+                        Color
+                        <input value={formData.color} onChange={handleChange} name="color" type="text" placeholder="Optional"  />
+                    </label>
+                </div>
+
+
+                <div className="stray-ctn">
+                    <label>
+                        Sterilized
+                        <input
+                            type="checkbox"
+                            name="is_sterilized"
+                            checked={formData.is_sterilized}
+                            onChange={handleCheckboxChange}
+                        />
+                    </label>
+
+                    <label>
+                        Is Stray
+                        <input
+                            type="checkbox"
+                            name="is_stray"
+                            checked={formData.is_stray}
+                            onChange={handleCheckboxChange}
+                        />
+                    </label>
+                </div>
+
+                </div>
+            }
+
+            {/* choose to add sightings to existing animals */}
+            {mode === "existing" &&            
+             <div className="mode-existing">
+                <div>
+                    <div className="add-header"> 
+                        <div className="animal-icon">{getAnimalEmoji(selectedAnimal.animal_type)} </div>
+                        <div><h2>{selectedAnimal.nickname}</h2></div>
+                        <button className="close-btn" type="button" onClick={onClose}> x</button>
+                    </div>
+                </div>
+            </div>}
+
+
+            <div className="modal-content">
+
                 <div className="found-details">
                  
                         <label>
                             Location*
-                            <input type="text" name="location" value={form.location} onChange={handleChange} />
+                            <input type="text" name="location" value={formData.location} onChange={handleChange} />
                         </label>
        
                         <label>
                             Sighted at*
-                            <input name="sighted_at" type="datetime-local" value={form.sighted_at} onChange={handleChange} />
+                            <input required name="sighted_at" type="datetime-local" value={formData.sighted_at} onChange={handleChange} />
                         </label>
        
                 </div>
-                <div>
+                <div className="status-list">
                
-                    <button type="button" onClick={()=>{handleHealthStatus('healthy')}}>Healthy</button>
-                    <button type="button" onClick={()=>{handleHealthStatus('sick')}}>Sick</button>
-                    <button type="button" onClick={()=>{handleHealthStatus('injured')}}>Injured</button>
-                    <button type="button" onClick={()=>{handleHealthStatus('unknown')}}>Unknown</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "healthy" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('healthy')}}>Healthy</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "sick" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('sick')}}>Sick</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "injured" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('injured')}}>Injured</button>
+                    <button 
+                        className={`status-ctn ${formData.health_status === "o" ? "active" : ""}`}
+                        type="button" onClick={()=>{handleHealthStatus('unknown')}}>Unknown</button>
 
                 </div>
                 
-                <div>
-                    <textarea
+                <div className="notes-ctn">
+                    <textarea 
                         name="notes" 
-                        value={form.notes}
+                        value={formData.notes}
                         onChange={handleChange}
                         placeholder="Notes: anything about this animal (Optional)"
                     />
                 </div>
 
             </div>
-            <div className="btn-group">            
-                <button className="primary-btn" type="submit">Create Animal & Add Sighting</button>
-                <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
-            </div>
+            {   mode === "new" &&
+                <div className="btn-group">            
+                    <button className="primary-btn" type="submit">Create Animal & Add Sighting</button>
+                    <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
+                </div>
+            }    
 
+            {   mode === "existing" &&
+                <div className="btn-group">            
+                    <button className="primary-btn" type="submit">Add New Sighting</button>
+                    <button className="secondary-btn" type="button" onClick={handleClearForm}>Cancel</button>
+                </div>
+            }    
         </form>
     )
 }

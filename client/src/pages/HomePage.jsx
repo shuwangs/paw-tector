@@ -1,7 +1,11 @@
 
-import React from "react";
+import React, {useContext} from "react";
+import {Link} from 'react-router-dom';
+import { useDiscover  } from "../context/DiscoverContext";
 import './HomePage.css'
 const HomePage = () => {
+    const {stats} = useDiscover();
+    console.log(stats);
     return (
         <div>
         
@@ -11,27 +15,38 @@ const HomePage = () => {
                     <p>Join our community of volunteers to track and care for stray animals in your neighborhood</p>
                 </div>
                 <div className="btn-group">
-                    <button className="btn-join">💚 Join Our Community</button>
-                    <button className="btn-report">🔍 Report Sighting</button>
+                    <Link to="/discover"  className="toLinkDiscover" >
+                        <button className="btn-join">💚 Explore Sightings</button>
+                    </Link>
+                    <Link to='/records' >
+                        <button className="btn-report">🔍 Report Sighting</button>
+                    </Link>
+                    
                 </div>
             </div>
 
             <div className="stats-ctn">
                 <div className="stats-card"> 
                     <div className="stats-icon">🐕</div>
-                    <div className="stats-count"> 3</div>
+                    <div className="stats-count">{stats.animals_tracked}</div>
                     <div className="stats-class"> Animal Tracked</div>
                 </div>
 
                 <div className="stats-card">
                     <div className="stats-icon"> 👀</div>
-                    <div className="stats-count"> 3</div>
+                    <div className="stats-count">{stats.total_sightings}</div>
                     <div className="stats-class">Total Sightings</div>
                 </div>
 
                 <div className="stats-card">
+                    <div className="stats-icon">❣️</div>
+                    <div className="stats-count"> {stats.total_volunteers}</div>
+                    <div className="stats-class">Volunteers</div>
+                </div>
+
+                <div className="stats-card">
                     <div className="stats-icon">📍</div>
-                    <div className="stats-count"> 3</div>
+                    <div className="stats-count"> {stats.locations}</div>
                     <div className="stats-class">Locations</div>
                 </div>
             </div>

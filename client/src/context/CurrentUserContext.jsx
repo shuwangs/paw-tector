@@ -1,30 +1,28 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUsers } from "../api/userApi.js";
+import { getUsers, getUserStats, fetchTrackedAnimals, onDeleteTrackedAnimal} from "../api/userApi.js";
 
 const CurrentUserContext = createContext();
 
 export const CurrentUserProvider = ({children}) => {
     const [users, setUsers] = useState([]);
-    const [currentUserId, setCurrentUserId] = useState(1);
-    const [trackedAnimals, setTrackedAnimals] = useState([])
+    const [currentUserId, setCurrentUserId] = useState(null);
+    const [trackedAnimals, setTrackedAnimals] = useState([]);
+    const [currentUserStats, setCurrentUserStats] = useState({
+        animals_tracked: 0,
+        total_sightings:0,
+        locations: 0
+    });
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    
 
-    const fetchTrackedAnimals = async (userId) => {
+    const getTrackedAnimals = async (userId) => {
         if(!userId) return;
         setLoading(true);
-        setError(null);
-
+        setError(null);   
         try {
-            const response = await fetch(`/api/users/${userId}/tracked-animals`);
-            if(!response.ok) {
-                throw new Error(`Fetch tracked animals failed (${response.status})`);
-            }
-            const data = await response.json();
-            console.log("tracked animals are : ", data);
-            setTrackedAnimals(data);
+            const result = await fetchTrackedAnimals(userId);
+            setTrackedAnimals(result);
         } catch(err) {
             setError(err.message || "Unknown error");
 
@@ -47,34 +45,45 @@ export const CurrentUserProvider = ({children}) => {
         }
     }
 
+    const fetchCurrentUserStats = async (userId) => {
+        if(!userId) return;
+        setLoading(true);
+        setError(null);
+
+        try {
+            const res = await getUserStats(userId);
+            setCurrentUserStats(res);
+        } catch(err) {
+            setError(err.message || "Unknown error");
+
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+
     useEffect(() =>{
         loadUsers();
+        fetchCurrentUserStats(currentUserId);
     },[])
 
+
     useEffect(() => {
-        fetchTrackedAnimals(currentUserId);
+        getTrackedAnimals(currentUserId);
+        fetchCurrentUserStats(currentUserId);
     }, [currentUserId]);
 
     const deleteTrackedAnimal = async (user_id, animal_id) => {
         const userId = Number(user_id);
-        console.log(userId);
         const individualId = Number(animal_id);
-
-        console.log(animal_id);
 
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
-                method: "DELETE"
-            })
+            await onDeleteTrackedAnimal(userId, individualId)
 
-            if (!response.ok) {
-                throw new Error(`Delete tracked animal failed (${response.status})`);
-            }
-            setTrackedAnimals(prev => {
-                return prev.filter((animal) => animal.invidual_id != individualId);
-            })
+            await getTrackedAnimals(userId);
 
         } catch(err) {
             setError(err.message || "Unknown error");
@@ -90,25 +99,29 @@ export const CurrentUserProvider = ({children}) => {
     const value = {
         users,
         currentUserId,
+        currentUserStats,
         setCurrentUserId,
+        getTrackedAnimals,
         trackedAnimals,
+        setTrackedAnimals,
         loading,
         error,
         fetchTrackedAnimals,
-        deleteTrackedAnimal
+        deleteTrackedAnimal,
     }
     
-
-
 
     return (
     <CurrentUserContext.Provider value={ value }>
         {children}
     </CurrentUserContext.Provider>)
 
-
 }
 
 export const useCurrentUser = () => {
-    return useContext(CurrentUserContext);
+    const ctx =useContext(CurrentUserContext);
+    if(! ctx) {
+        throw new Error("userCurrentUser must be used within a CurrentUserProvider");
+    }
+    return ctx;
 }
