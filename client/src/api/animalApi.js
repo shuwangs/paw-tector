@@ -5,7 +5,7 @@ export const getAnimalHistory = async (animalId) => {
     if(!response.ok) {
         throw new Error ('Failed to fetch individual');
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
 }
 
@@ -14,6 +14,6 @@ export const getAnimalStats = async (animalId) => {
     if(!response.ok) {
         throw new Error ('Failed to fetch individual');
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
 }

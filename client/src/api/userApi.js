@@ -21,8 +21,6 @@ export const updateTrackedAnimal = async (user_id, animal_id, payload )=> {
     console.log("edit animal form submission");
     const userId = Number(user_id);
     const individualId = Number(animal_id);
-    console.log(payload);
-
     
     const response = await fetch(`/api/users/${userId}/tracked-animals/${individualId}`, {
         method: "PUT",
@@ -60,7 +58,6 @@ export const onDeleteTrackedAnimal = async (userId, individualId) =>{
         throw new Error(`Delete tracked animal failed (${response.status})`);
     }
 
-    // const data = await response.json();
     return true;
 }
   

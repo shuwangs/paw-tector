@@ -4,8 +4,7 @@ export const getSightings = async (page) => {
   if (!response.ok) {
     throw new Error("Failed to fetch sightings");
   }
-  const data = response.json();
-  console.log(data);
+  const data = await response.json();
   return data;
 };
 
@@ -22,7 +21,6 @@ export const createAnimalWithSighting = async (user_id, form) => {
     throw new Error("Failed to create animal");
   }
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
@@ -39,7 +37,6 @@ export const addNewSightingToExistingAnimal = async (user_id, form) => {
     throw new Error("Failed to create animal");
   }
   const data = await response.json();
-  console.log(data);
   return data;
 
 }
@@ -47,24 +44,21 @@ export const addNewSightingToExistingAnimal = async (user_id, form) => {
 export const getSightingsStats = async () => {
     const response = await fetch("/api/sightings/stats");
     if (!response.ok) {
-    throw new Error("Failed to create animal");
-  }
+      throw new Error("Failed to get sightings stats");
+    }
   const data = await response.json();
-    // console.log(data);
   return data;
 
 }
 
 export const onSearch = async(searchParams)=> {
   const query = new URLSearchParams(searchParams).toString();
-  console.log( "Searched query is" ,query);
 
   const response = await fetch(`/api/sightings/search?${query}`);
 
   if (!response.ok) {
-    throw new Error("Failed to create animal");
+    throw new Error("Failed to delete animal");
   }
   const data = await response.json();
-  console.log("fetched results in sightingsApi", data);
   return data;
 }

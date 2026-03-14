@@ -78,8 +78,46 @@ Each animal has a dedicated profile page displaying:
 Paw-tector uses a relational PostgreSQL database to model users, animals, and community sightings.
 ![ERD](./docs/erd.png)
 
-# APIs
-To be included
+##  APIs
+### Users Related APIs
+- GET `/api/users`
+- GET `/api/users/${userId}/tracked-animals`
+- GET `/api/users/${userId}/stats`
+- PUT  `/api/users/${userId}/tracked-animals/${individualId}`
+- DELETE `/api/users/${userId}/tracked-animals/${individualId}`
+  
+### Animal related APIs
+- GET `/api/individuals/${animalId}`
+- GET `/api/individuals/${animalId}/stats`
+
+### Sightings related APIs
+- GET `/api/sightings?page=${page}&limit=12`
+- POST `/api/users/${Number(user_id)}/tracked-animals`
+- POST `/api/users/${Number(user_id)}/sightings`
+- GET `/api/sightings/stats`
+- GET `/api/sightings/search?${query}`
+
+## Testing
+
+### Frontend API tests were implemented using Vitest.
+
+Covered functions include:
+
+- Fetch sightings list
+- Fetch sightings statistics
+- Search sightings with filters
+- Create tracked animal with sighting
+- Add new sighting to existing animal
+- Fetch animal history
+- Fetch animal statistics
+
+![Frontend testing coverage](./client/public/screenshot-client-api-coverage.png)
+
+### Frontend component tests were implemented using Vitest and React Testing Library.
+- Rendering form fields correctly based on component mode
+- Handling user input changes
+- Submitting forms and triggering API calls
+- Conditional rendering for different component states
 
 ## How to start
 ### Clone respository
