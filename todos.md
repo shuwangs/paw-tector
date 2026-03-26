@@ -32,7 +32,7 @@
 - [X] discovery page context 
 
 5. testing
-- [ ] add testing
+- [X] add testing
 - [ ] frontend form validation
 - [ ] required fields
 - [ ] email type validation
@@ -57,3 +57,9 @@
 - [ ] UI delay (tracked Animal and Stats) after add and editing 
 - [ ] use toast to give user message.
 - [ ] let user select display limits
+
+8. Next:
+- [ ] authApi frontend
+- [ ] backend: backend auth
+- [ ] third party auth
+- [ ] register/login page
